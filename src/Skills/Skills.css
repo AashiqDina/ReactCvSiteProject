@@ -1,0 +1,144 @@
+.SkillsTitleSection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.PageTitleSkills{
+    color: #e2e2e2;
+    font-size: clamp(3rem, 5vw, 20rem);
+    margin: 0;
+    font-family: 'Poppins', serif;
+    font-weight: 500;
+    display: flex;
+    gap: 0.05em;
+    margin-bottom: 0.5rem;
+    mask-image: linear-gradient(to top, transparent 1%, white 35%);
+}
+
+.SkillsTitleLetter {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    display: inline-block;
+}
+
+.SkillsTitleLetter.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.SkiilsSearchBarSection{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 2rem;
+}
+
+.SkillsSearchInput{
+    height: 2.5rem;
+    font-size: 1.2rem;
+    border-radius: 5rem;
+    outline: none;
+    border: none;
+    color: black;
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+    font-family: 'Poppins', serif;
+    font-weight: 400;
+}
+
+.SkillsSearchInput:focus{
+    box-shadow: 0 0 3rem 0 rgba(255, 255, 255, 0.6);
+}
+
+.SkillsSectionTitle{
+    color: #e2e2e2;
+    margin-bottom: 2rem;
+    mask-image: linear-gradient(to top, transparent 1%, white 35%);
+}
+
+.SkillsSection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.SkillsSection > article{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.SkillsSection > article > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.SkillSpan{
+    color: #e2e2e2;
+    padding: 1rem;
+    background-color: #070e14b7;
+    border-radius: 2rem;
+    font-size: 1.1rem;
+    font-family: 'Poppins', serif;
+    font-weight: 400;
+    transition: all 0.2s ease-in-out;
+    border: #e2e2e200 1px solid;
+}
+
+.SkillSpan:hover{
+    transform: scale(1.1);
+    font-weight: 600;
+    border: #e2e2e2 1px solid;
+    transition: all 0.5s ease-in-out;
+    background-color: #e2e2e2;    
+    color: #070e14b7;
+}
+
+.SkillSpan::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    z-index: 0;
+    pointer-events: none;
+
+    mask: 
+        linear-gradient(0deg, white 100%, transparent 50%) content-box,
+        linear-gradient(0deg, white 100%, transparent 50%) border-box;
+    mask-composite: exclude;
+
+    background: linear-gradient(90deg, transparent 20%, #ffffff00 40%, transparent 60%, #070e14b7 80%);
+    background-size: 200% 200%;
+    animation: animatedBorder 5s linear infinite;
+    transition: opacity 0.2s ease-in-out;
+    opacity: 0;
+}
+
+.SkillSpan:hover::before {
+    opacity: 1;
+}
+
+.VerticalSkillsLine{
+    width: 1px;
+    height: 50vh;
+    background-color: #e2e2e2;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+

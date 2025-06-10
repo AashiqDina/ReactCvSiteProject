@@ -1,0 +1,220 @@
+.PageHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #04080c05;
+    margin: 1rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 10rem;
+}
+
+.HeaderTitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    color: #E5E5E5;
+    font-size: 2.5rem;
+    text-align: center;
+    z-index: 2;
+    font-family: 'Poppins', serif;
+    font-weight: 500;
+}
+
+.HeaderTitle:hover{
+    background: linear-gradient(90deg, #e2e2e2 25%, #c2c2c2 50%, #e2e2e2 75%);
+    background-size: 200% 100%;
+    animation-name: Shimmer;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.DefaultButton{
+    all: unset;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.DefaultButton:focus {
+    outline: 1px solid rgba(255, 255, 255, 0.455);
+    outline-offset: 2px;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0);
+
+}
+
+.DefaultButton:hover{
+    all: unset;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.DefaultButton::before{
+    all: unset;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.BurgerMenu{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: flex-start;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+
+.BurgerMenuOpen{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+
+.BurgerMenuButton{
+    all: unset;
+}
+
+.BurgerMenuButton::before{
+    all: unset;
+}
+
+.BurgerOne, .BurgerTwo, .BurgerThree{
+    background-color: #E5E5E5;
+    border-radius: 5rem;
+    height: 0.3rem;
+    width: 1.7rem;
+    transition: all 0.5s ease-in-out;
+
+}
+
+.BurgerOneOpen, .BurgerTwoOpen, .BurgerThreeOpen{
+    animation: ease-in;
+    background-color: #E5E5E5;
+    border-radius: 5rem;
+    height: 0.3rem;
+    width: 1.7rem;
+    transition: all 0.5s ease-in-out;
+}
+
+.BurgerOneOpen {
+    transform: translateY(0.3rem) rotate(45deg); 
+    transition: all 0.5s ease-in-out;
+}
+
+.BurgerTwoOpen {
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+.BurgerThreeOpen {
+    transform: translateY(-0.3rem) rotate(-45deg);
+    transition: all 0.5s ease-in-out;
+}
+
+a{
+    text-decoration: none;
+}
+
+.DropDownMenu{
+    position: absolute;
+    top: 7rem;
+    left: 0rem;
+    padding: 1rem;
+    border-radius:  10rem 10rem 10rem 10rem;
+    background-color: #e5e5e580;
+    transform: scale(0);
+    opacity: 0;
+    transition: all 1s ease-in-out;
+    z-index: 100;
+    transform: translateX(-100%);
+}
+
+.DropDownMenuClicked{
+    background-color: #070e14b7;
+    border-radius:  0rem 1rem 1rem 0rem;
+    transform: translateX(0%);
+    transform: scale(1);
+    opacity: 1;
+}
+
+.ButtonsCollection{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: center;
+    gap: 1rem;
+    
+}
+
+button {
+    position: relative;
+    background-color: #070e14b7;
+    border: none;
+    border-radius: 10rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    color: #E5E5E5;
+    font-family: 'Poppins', serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    z-index: 0;
+    pointer-events: none;
+
+    mask: 
+        linear-gradient(0deg, white 100%, transparent 50%) content-box,
+        linear-gradient(0deg, white 100%, transparent 50%) border-box;
+    mask-composite: exclude;
+
+    background: linear-gradient(90deg, #ffffff 25%, transparent 50%, #ffffff 75%);
+    background-size: 200% 200%;
+    animation: animatedBorder 2s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+}
+
+button:hover::before {
+    opacity: 1;
+}
+
+@keyframes animatedBorder {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+
+@keyframes Shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
