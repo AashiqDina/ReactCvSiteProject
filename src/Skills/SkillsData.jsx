@@ -6,16 +6,16 @@ export default function SkillsData(){
                 Skills: ["JavaScript", "TypeScript", "React", "HTML5", "CSS3"]
             },
             {
+                SectionName: "Design",
+                Skills: ["Figma", "User Interface (UI) Principles", "User Experience (UX) Principles", "Graphic Design"]
+            },
+            {
                 SectionName: "BackEnd",
                 Skills: ["Java", "Python", "C#", ".Net", "API Integration", "Pandas (Learning)"]
             },
             {
-                SectionName: "Design",
-                Skills: ["Figma", "User Interface (UI) Principles", "User Experience (UX) Principles"]
-            },
-            {
                 SectionName: "Databases",
-                Skills: ["SQL", "Database Design", "Graphic Design"]
+                Skills: ["SQL", "Database Design", "Google Cloud Firebase"]
             },
             {
                 SectionName: "Other",

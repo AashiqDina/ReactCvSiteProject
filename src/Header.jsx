@@ -24,8 +24,15 @@ export default function Header(){
 
             <div style={WinWidth < 500 ? {transform: "scale(0.8)"} : {}} className={`DropDownMenu ${BurgerMenuClicked ? "DropDownMenuClicked" : ""}`}>
                 <div className='ButtonsCollection'>
-                    <button onClick={() => console.log("works")}>Experience</button>
-                    <button>Education</button>
+                    <Link style={{color:'white'}} to="/">
+                        <button>Home</button>
+                    </Link>
+                    <Link style={{color:'white'}} to="/Experience">
+                        <button>Experience</button>
+                    </Link>
+                    <Link style={{color:'white'}} to="/Education">
+                        <button>Education</button>
+                    </Link>
                     <Link style={{color:'white'}} to="/Projects">
                         <button>Projects</button>
                     </Link>

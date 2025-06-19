@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     margin: 0;
+    perspective: 1000px;
 }
 
 .PageTitleProjects{
@@ -36,6 +37,8 @@
     transform-style: preserve-3d;
     transition: all 0.1s ease-in-out;
     border: 1px rgba(255, 255, 255, 0.455) solid;
+    transform-style: preserve-3d;
+    perspective: 800px;
 }
 
 .ContentArea{
@@ -83,7 +86,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
     gap: 2rem;
     margin-left: 1rem;
     margin-right: 0.5rem;
@@ -222,6 +224,10 @@
   width: 100%;
 }
 
+.UpDownButtons{
+    scale: 0.9;
+}
+
 .UpTriangle{
     position: relative;
     width: 0; 
@@ -244,6 +250,11 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    transition: all 2.5s ease-in-out;
+    animation-name: UpDownBobble;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-direction:alternate-reverse;
 }
 
 .UpAlignedButton{
@@ -276,6 +287,11 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    transition: all 2.5s ease-in-out;
+    animation-name: UpDownBobble;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-direction: alternate;
 }
 
 .DownAlignedButton{
@@ -289,14 +305,6 @@
 .ProjectsMainSection > .ProjectsDisplayed > button > div, .ProjectsMainSection > .UpDownButtons > div > button > div{
     height: 50px;
     width: 50px;
-}
-
-.UpDownButtons{
-    transition: all 2.5s ease-in-out;
-    animation-name: UpDownBobble;
-    animation-iteration-count: infinite;
-    animation-duration: 1s;
-    animation-direction: alternate;
 }
 
 .UpDownButtons > div{
@@ -522,6 +530,14 @@
     border-radius: 1rem;
     color: white;
     font-weight: bold;
+}
+
+.ContentAreaBodyImage1, .ContentAreaBodyImage2{
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
+    z-index: 5rem;
+    perspective: 1000px;
+    will-change:auto;
+    transform: translateZ(30px);
 }
 
 @keyframes ScrollLeft {

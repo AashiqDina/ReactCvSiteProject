@@ -3,6 +3,7 @@ import StarryBackground from "../StarryBackground"
 import './Skills.css'
 import { useEffect, useState } from "react"
 import SkillsData from "./SkillsData"
+import PageTitle from "../PageTitle"
 
 export default function Skills(){
     const [WinWidth, setWinWidth] = useState(window.innerWidth);
@@ -47,16 +48,7 @@ export default function Skills(){
         <>
             <Header/>
             <StarryBackground/>
-            <section className='SkillsTitleSection'>
-                <h2 className='PageTitleSkills'>{'Skills'.split('').map((char, index) => {
-                    return (
-                        <span
-                            key={index}
-                            className={`SkillsTitleLetter ${AnimateSkillsTitle ? 'show' : ''}`}
-                            style={{ transitionDelay: `${index * 0.1}s` }}
-                            >{char}</span>)
-                        })}</h2>
-            </section>
+            <PageTitle Title="Skills"/>
             <section className="SkiilsSearchBarSection">
                 <input style={WinWidth < 1000 ? {width: "80%"} : {width: "50%"}} type="text" value={SkillsInput} onChange={(e) => {FilterSkills(e.target.value); setSkillsInput(e.target.value)}} className="SkillsSearchInput" placeholder="Enter a Skill (e.g. JavaScript)"/>
             </section>

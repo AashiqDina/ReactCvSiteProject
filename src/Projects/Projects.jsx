@@ -5,6 +5,7 @@ import './Projects.css';
 import { useEffect, useState, useRef } from 'react';
 import ProjectData from './ProjectData.jsx'
 import { Link } from 'react-router-dom'
+import PageTitle from '../PageTitle.jsx';
 
 
 export default function Projects() {
@@ -27,10 +28,10 @@ export default function Projects() {
         const ProjCardCenterX = ArticleSpecs.width / 2;
         const ProjCardCenterY = ArticleSpecs.height / 2;
 
-        const RotateX = ((yDistanceInArticle - ProjCardCenterY) / ProjCardCenterY) * 20;
-        const RotateY = ((xDistanceInArticle - ProjCardCenterX) / ProjCardCenterX) * 20;
+        const RotateX = ((yDistanceInArticle - ProjCardCenterY) / ProjCardCenterY) * 22;
+        const RotateY = ((xDistanceInArticle - ProjCardCenterX) / ProjCardCenterX) * 22;
 
-        ProjCard.style.transform = `rotateX(${-RotateX}deg) rotateY(${RotateY}deg)`
+        ProjCard.style.transform = `scale(1.05) rotateX(${-RotateX}deg) rotateY(${RotateY}deg)`
     }
 
     function handleMouseLeave() {
@@ -95,14 +96,18 @@ export default function Projects() {
         function MoveDown(){
             if(TheSortedArray.length > CurrentProjectSet){
                 triggerAnimation()
-                SetProjectSet(CurrentProjectSet+1)
+                const timeout = setTimeout(() => {
+                    SetProjectSet(CurrentProjectSet+1)
+                }, 500);
             }
         }
 
         function MoveUp(){
             if(CurrentProjectSet > 0){
                 triggerAnimation()
-                SetProjectSet(CurrentProjectSet-1)
+                const timeout = setTimeout(() => {
+                    SetProjectSet(CurrentProjectSet-1)
+                }, 500);
             }
         }
 
@@ -121,16 +126,7 @@ export default function Projects() {
         <>
             {!DisplayWindow && <Header />}
             <StarryBackground />
-            {!DisplayWindow && <section className='ProjectsTitleSection'>
-                <h2 className='PageTitleProjects'>{'Projects'.split('').map((char, index) => {
-                                    return (
-                                        <span
-                                            key={index}
-                                            className={`MainProjectLetter ${AnimateMainProjectTest ? 'show' : ''}`}
-                                            style={{ transitionDelay: `${index * 0.1}s` }}
-                                            >{char}</span>)
-                                })}</h2>
-            </section>}
+            {!DisplayWindow && <PageTitle Title="Projects"/>}
             {!DisplayWindow && <section className='ProjectsMainSection' id='ProjectsMainSection'>
                 <article role='button' className='ProjectsDisplayed' id='ProjectsDisplayed'>
 
@@ -153,11 +149,11 @@ export default function Projects() {
                             </div>
                         </button>
                     )}
-                    <button className='DefaultButton' style={{zIndex: '3'}} onClick={() => {
+                    <button className='DefaultButton' onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} style={{zIndex: '3'}} onClick={() => {
                             setDisplayWindow(true)
                             setDisplayProjectData(TheSortedArray[CurrentProjectSet]?.[1])
                         }}>
-                        <article ref={ProjectCardRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} style={WinWidth < 730 ? { width: '80vw', height: '80vw' } : WinWidth < 850 ? { width: '65vw', height: '65vw' } : WinWidth < 1000 ? { width: '50vw', height: '50vw' } : {}} className='MainProject'>
+                        <article ref={ProjectCardRef} style={WinWidth < 730 ? { width: '80vw', height: '80vw' } : WinWidth < 850 ? { width: '65vw', height: '65vw' } : WinWidth < 1000 ? { width: '50vw', height: '50vw' } : {}} className='MainProject'>
 
                             <div className='ContentArea'>
                                 <div className="ContentTitle">
@@ -170,12 +166,12 @@ export default function Projects() {
                                         <img style={{width: "45%", cursor: "pointer", borderRadius: "1rem"}} onClick={() => {
                                             setDisplayWindow(true)
                                             setDisplayImage(TheSortedArray[CurrentProjectSet]?.[1]?.Img1)
-                                        }} src={TheSortedArray[CurrentProjectSet]?.[1]?.Img1 || ""} alt="" />
+                                        }} className='ContentAreaBodyImage1' src={TheSortedArray[CurrentProjectSet]?.[1]?.Img1 || ""} alt="" />
 
                                         { TheSortedArray[CurrentProjectSet]?.[1]?.Img2 ? <img style={{width: "45%", cursor: "pointer", borderRadius: "1rem"}} onClick={() => {
                                             setDisplayWindow(true)
                                             setDisplayImage(TheSortedArray[CurrentProjectSet]?.[1]?.Img2)
-                                        }} src={TheSortedArray[CurrentProjectSet]?.[1]?.Img2 || ""} alt="" /> : null}
+                                        }} className='ContentAreaBodyImage2' src={TheSortedArray[CurrentProjectSet]?.[1]?.Img2 || ""} alt="" /> : null}
                                     </div>
                                     <div>
                                         <h3 className='ProjectViewMore'>{TheSortedArray[CurrentProjectSet]?.[1]?.ProjectTitle ? "View More" : ""}</h3>
@@ -274,7 +270,7 @@ export default function Projects() {
                                     <img onClick={() => {
                                         setDisplayWindow(true)
                                         setDisplayImage(DisplayProjectData.Img1)
-                                    }} style={{width: "20rem"}} src={DisplayProjectData.Img1 || ""} alt="" />
+                                    }} style={{width: "20rem", borderRadius: "1rem"}} src={DisplayProjectData.Img1 || ""} alt="" />
                                     <p style={{maxWidth: "35rem", textAlign: "center"}} >{DisplayProjectData.Description2 || ""}</p>
                                 </div>
                                 <div onClick={() => {
@@ -282,13 +278,13 @@ export default function Projects() {
                                         setDisplayImage(DisplayProjectData.Img2)
                                     }} className='DisplayedWindowBodyRow2'>
                                     <p style={{maxWidth: "35rem", textAlign: "center"}}>{DisplayProjectData.Description3 || ""}</p>
-                                    <img  style={{width: "20rem"}} src={DisplayProjectData.Img2 || ""} alt="" />
+                                    <img  style={{width: "20rem", borderRadius: "1rem"}} src={DisplayProjectData.Img2 || ""} alt="" />
                                 </div>
                                 <div onClick={() => {
                                         setDisplayWindow(true)
                                         setDisplayImage(DisplayProjectData.Img3)
                                     }} className='DisplayedWindowBodyRow3'>
-                                    <img style={{width: "20rem"}} src={DisplayProjectData.Img3 || ""} alt="" />
+                                    <img style={{width: "20rem", borderRadius: "1rem"}} src={DisplayProjectData.Img3 || ""} alt="" />
                                     <p style={{maxWidth: "35rem", textAlign: "center"}}>{DisplayProjectData.Description4 || ""}</p>
                                 </div>
                                 <div onClick={() => {
@@ -296,7 +292,7 @@ export default function Projects() {
                                         setDisplayImage(DisplayProjectData.Img4)
                                     }} className='DisplayedWindowBodyRow4'>
                                     <p style={{maxWidth: "35rem", textAlign: "center"}}>{DisplayProjectData.Description5 || ""}</p>
-                                    <img style={{width: "20rem"}} src={DisplayProjectData.Img4 || ""} alt="" />
+                                    <img style={{width: "20rem", borderRadius: "1rem"}} src={DisplayProjectData.Img4 || ""} alt="" />
                                 </div>
                             </div>
                         </article>

@@ -1,0 +1,28 @@
+.LevelSection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.ExperienceBarContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.ExperienceBar{
+    height: 3rem;
+    width: 60vw;
+    background-color: rgba(240, 248, 255, 0);
+    border: 1px solid white;
+    border-radius: 10rem;
+}
+
+.FilledPart{
+    height: 100%;
+    background-color: #e2e2e2;
+    border-radius: 10rem 0rem 0rem 10rem;
+}
