@@ -7,14 +7,14 @@ import ExperienceData from "./ExperienceData"
 export default function Experience(){
     const ExpData = ExperienceData()
     var temp = 0;
-    const Months = ExpData.map((Job, index) => {
-        return (
-            (Date(Job.Dates.End).getFullYear() - Date(Job.Dates.Start).getFullYear()) + (Date(Job.Dates.End).getMonth() + Date(Job.Dates.End).getMonth())
-        )
-    })
+    // const Months = ExpData.map((Job, index) => {
+        // return (
+            // (Date(Job.Dates.End).getFullYear() - Date(Job.Dates.Start).getFullYear()) + (Date(Job.Dates.End).getMonth() + Date(Job.Dates.End).getMonth())
+        // )
+    // })
     const Level = ExpData.length * 4
     const ExperienceMax = ExpData.length * Level * 1000
-    const CurrentExperience = ExpData.length * Level * Months 
+    const CurrentExperience = ExpData.length * Level //* Months 
 
     return (
         <>
