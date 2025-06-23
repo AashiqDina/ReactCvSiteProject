@@ -28,7 +28,7 @@ export default function ProjectData(){
                 Img2: '/Projects/Images/TradeSim3.png',
                 Img3: '/Projects/Images/TradeSim.png',
                 Img4: '/Projects/Images/TradeSim4.png',
-                TechUsed: ['React', 'TypeScript', 'C#', '.Net', 'HTML5', 'CSS3'],
+                TechUsed: ['React', 'TypeScript', 'C#', '.Net', 'HTML5', 'CSS3', 'Next.js'],
                 Link: 'https://github.com/AashiqDina/TradingSimulator',
                 TryableLink: null
             },
@@ -43,23 +43,38 @@ export default function ProjectData(){
                 Img2: '/Projects/Images/CookAi2.png',
                 Img3: '/Projects/Images/CookAi3.png',
                 Img4: '/Projects/Images/CookAi4.png',
-                TechUsed: [''],
+                TechUsed: ['JavaScript', 'React', 'HTML5', 'CSS3'],
                 Link: 'https://github.com/AashiqDina/CookingAiSite',
                 TryableLink: null
             },
             {
                 ProjectTitle: "Simple Image Classifier",
-                Description1: "A Simple image classifer made with Python, PyTorch and trained with the CIFAR10 dataset, achieving a training accuracy of 86% and a test accuracy of 74%",
-                Description2: "",
+                Description1: "A Simple image classifer made with Python, PyTorch and trained with the CIFAR10 dataset, achieving a training accuracy of 86% and a test accuracy of 74% after 50 epochs",
+                Description2: "The model is created with a modular structure in mind, with multi-branch blocks, adaptive pooling and dropout to improve generalisation. Intergrating data augmentation and learning rate scheduling.",
                 Description3: "",
                 Description4: "",
                 Description5: "",
-                Img1: './Images/ImageClassifier.png',
+                Img1: '/Projects/Images/ImageClassifier.png',
                 Img2: '',
                 Img3: '',
                 Img4: '',
-                TechUsed: [''],
+                TechUsed: ['Python', 'Pytorch'],
                 Link: 'https://github.com/AashiqDina/Neural_Networks_Project/blob/main/NeuralNetworksProject.ipynb',
+                TryableLink: null
+            },
+            {
+                ProjectTitle: "Portfolio/CV - Style Website",
+                Description1: "The site you are currently on, this block is to give a rundown on the technologies used and ideas that went into its creation. This particular site is a a passion project, allowing me to have fun while making something useful and expanding my skills.",
+                Description2: "For this project I wanted it to feel personal to me, so I chose an aesthetic style I like with colours I both like and work well together. Going for a mixture of modernism, simplicity and aestheitc appeal. While there may not be much I try to focus on the smaller details, compatibility and my own learning as I continuously update and work on the site.",
+                Description3: "In this site, I tried to make it so that each page I try to explore something different, and try to make it unique in its own way. For example, this page the Project Page I tried to make the center card have a three dimensional feel to it, so on laptop and desktop browsers you can rotate the card slightly by hovering over it in certain locations of the card itself.",
+                Description4: "The pages try to be simple and easy to use, making it clear where what is visible, clickable and more. For example, in the Education section, if you want a detailed look into the grades, modules and such you click a labeled arrow to access a timeline, where it is labeled that each point can be clicked to access more information.",
+                Description5: "The User Experience was also taken into account when creating the site, designing it so when someone viewing the page is looking to see if I have a certain skill they can simply search for it, making it simple and easy to find whats needed.",
+                Img1: '/Projects/Images/ThisSite (4).png',
+                Img2: '/Projects/Images/ThisSite (1).png',
+                Img3: '/Projects/Images/ThisSite (2).png',
+                Img4: '/Projects/Images/ThisSite (3).png',
+                TechUsed: ['JavaScript', 'React', 'HTML5', 'CSS3'],
+                Link: 'https://github.com/AashiqDina/ReactCvSiteProject',
                 TryableLink: null
             },
             {
@@ -73,7 +88,7 @@ export default function ProjectData(){
                 Img2: '/Projects/Images/WordleLike (2).png',
                 Img3: '/Projects/Images/WordleLike (3).png',
                 Img4: '/Projects/Images/WordleLike (4).png',
-                TechUsed: [''],
+                TechUsed: ['JavaScript', 'React', 'HTML5', 'CSS3'],
                 Link: 'https://github.com/AashiqDina/ReactHangManLikeGame',
                 TryableLink: null
             },
@@ -88,7 +103,7 @@ export default function ProjectData(){
                 Img2: './Images/TradeSim3.png',
                 Img3: './Images/TradeSim1.png',
                 Img4: './Images/TradeSim4.png',
-                TechUsed: [''],
+                TechUsed: ['Swift', 'C#', 'Firebase'],
                 Link: null,
                 TryableLink: null
             },
@@ -103,7 +118,7 @@ export default function ProjectData(){
                 Img2: './Images/TradeSim3.png',
                 Img3: './Images/TradeSim1.png',
                 Img4: './Images/TradeSim4.png',
-                TechUsed: [''],
+                TechUsed: ['JavaScript', 'Node.js'],
                 Link: null,
                 TryableLink: null
             },
@@ -118,7 +133,7 @@ export default function ProjectData(){
                 Img2: './Images/TradeSim3.png',
                 Img3: './Images/TradeSim1.png',
                 Img4: './Images/TradeSim4.png',
-                TechUsed: [''],
+                TechUsed: ['C#'],
                 Link: null,
                 TryableLink: null
             },
@@ -133,7 +148,7 @@ export default function ProjectData(){
                 Img2: './Images/TradeSim3.png',
                 Img3: './Images/TradeSim1.png',
                 Img4: './Images/TradeSim4.png',
-                TechUsed: [''],
+                TechUsed: ['Java'],
                 Link: null,
                 TryableLink: null
             },
@@ -148,7 +163,7 @@ export default function ProjectData(){
                 Img2: './Images/TradeSim3.png',
                 Img3: './Images/TradeSim1.png',
                 Img4: './Images/TradeSim4.png',
-                TechUsed: [''],
+                TechUsed: ['SQL', 'Database Design'],
                 Link: null,
                 TryableLink: null
             },
@@ -163,7 +178,7 @@ export default function ProjectData(){
                 Img2: './Images/TradeSim3.png',
                 Img3: './Images/TradeSim1.png',
                 Img4: './Images/TradeSim4.png',
-                TechUsed: [''],
+                TechUsed: ['JavaScript', 'React', 'HTML5', 'CSS3',],
                 Link: null,
                 TryableLink: null
             },
@@ -178,7 +193,7 @@ export default function ProjectData(){
                 Img2: './Images/TradeSim3.png',
                 Img3: './Images/TradeSim1.png',
                 Img4: './Images/TradeSim4.png',
-                TechUsed: [''],
+                TechUsed: ['Python', 'Pandas'],
                 Link: null,
                 TryableLink: null
             },
@@ -193,7 +208,7 @@ export default function ProjectData(){
                 Img2: './Images/TradeSim3.png',
                 Img3: './Images/TradeSim1.png',
                 Img4: './Images/TradeSim4.png',
-                TechUsed: [''],
+                TechUsed: ['JavaScript', 'PHP', 'HTML5', 'CSS3'],
                 Link: null,
                 TryableLink: null
             },

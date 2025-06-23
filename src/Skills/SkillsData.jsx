@@ -3,7 +3,7 @@ export default function SkillsData(){
         [
             {
                 SectionName: "FrontEnd",
-                Skills: ["JavaScript", "TypeScript", "React", "HTML5", "CSS3"]
+                Skills: ["JavaScript", "TypeScript", "React", "HTML5", "CSS3","Next.js"]
             },
             {
                 SectionName: "Design",
@@ -11,7 +11,7 @@ export default function SkillsData(){
             },
             {
                 SectionName: "BackEnd",
-                Skills: ["Java", "Python", "C#", ".Net", "API Integration", "Pandas (Learning)"]
+                Skills: ["Java", "Python", "C#", ".Net", "API Integration", "Pandas (Learning)","Node.js"]
             },
             {
                 SectionName: "Databases",
@@ -19,7 +19,7 @@ export default function SkillsData(){
             },
             {
                 SectionName: "Other",
-                Skills: ["Git", "Github", "PHP", "Node.js", "GLSL (Basic)"]
+                Skills: ["Git", "Github", "PHP", "GLSL (Basic)"]
             }
         ]
     )

@@ -27,20 +27,15 @@ export default function Skills(){
             return
         }
         let ToFilterSkills = SkillsData()
-        let FilteredSkills = ToFilterSkills.map((SkillsSections, index) => {
-                                let NewSkills = SkillsSections.Skills.map((TheSkill, index) => {
-                                    if(TheSkill.toLowerCase().startsWith(input.toLowerCase())){
-                                        return TheSkill;
-                                    }
-                                    return null
-                                }).filter(skill => skill !== null);
-                                return (
-                                    {
-                                        SectionName: ToFilterSkills[index].SectionName,
-                                        Skills: NewSkills
-                                    }
-                                )
-                            })
+        const FilteredSkills = ToFilterSkills.map(Section => {
+            const Skills = Section.Skills.filter(Skill => {
+                return Skill.toLowerCase().includes(input.toLowerCase())})
+            
+            return {
+                SectionName: Section.SectionName,
+                Skills: Skills
+            }
+        }).filter(Section => Section.Skills.length > 0)
         setSkillsData(FilteredSkills)
     }
 
