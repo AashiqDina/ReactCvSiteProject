@@ -125,12 +125,36 @@ export default function Projects() {
     return (
         <>
             {!DisplayWindow && <Header />}
+                {DisplayImage && <div className='ProjectImageBackButton' onClick={() => {
+                        setDisplayImage(null)
+                        setDisplayWindow(true)
+                        setDisplayProjectData(TheSortedArray[CurrentProjectSet]?.[1])
+                    }}>
+                        <div className='ProjectBackLineOne'></div>
+                        <div className='ProjectBackLineTwo'></div>
+                    </div>}
+                {DisplayWindow && <div>
+                    <button className='DefaultButton' onClick={() => {
+                                                setDisplayImage(null)
+                                                setDisplayWindow(false)
+                                                setDisplayProjectData(null)
+                                            }}>
+                                            <div className='Cross'>
+                                                <div className='BurgerMenuOpen'>
+                                                    <div className='BurgerOneOpen'></div>
+                                                    <div className='BurgerTwoOpen'></div>
+                                                    <div className='BurgerThreeOpen'></div>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    }
             <StarryBackground />
             {!DisplayWindow && <PageTitle Title="Projects"/>}
-            {!DisplayWindow && <section className='ProjectsMainSection' id='ProjectsMainSection'>
+            {<section className='ProjectsMainSection' id='ProjectsMainSection'>
                 <article role='button' className='ProjectsDisplayed' id='ProjectsDisplayed'>
 
-                    {WinWidth > 1000  && (
+                    {WinWidth > 1000  && !DisplayWindow && (
                         <button className='DefaultButton' onClick={MoveLeft}>
                             <article className='LeftProject'>
                                 <div className='ContentArea'>
@@ -142,45 +166,122 @@ export default function Projects() {
                         </button>
                     )}
                     
-                    {WinWidth < 1000 && (
+                    {WinWidth < 1000 && !DisplayWindow && (
                         <button style={{padding: "0.8rem", marginLeft: "-2.5rem", marginRight: "-2.5rem"}} className='LeftTriangleButton' onClick={MoveLeft}>
                             <div style={{transform: "scale(0.8)"}} className='LeftAlignedButton'>
                                 <div className='LeftTriangle'></div>
                             </div>
                         </button>
                     )}
-                    <button className='DefaultButton' onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} style={{zIndex: '3'}} onClick={() => {
-                            setDisplayWindow(true)
-                            setDisplayProjectData(TheSortedArray[CurrentProjectSet]?.[1])
-                        }}>
-                        <article ref={ProjectCardRef} style={WinWidth < 730 ? { width: '80vw', height: '80vw' } : WinWidth < 850 ? { width: '65vw', height: '65vw' } : WinWidth < 1000 ? { width: '50vw', height: '50vw' } : {}} className='MainProject'>
 
-                            <div className='ContentArea'>
-                                <div className="ContentTitle">
-                                    {TheSortedArray[CurrentProjectSet]?.[1]?.ProjectTitle || ""}
-                                </div>
-                                <div className='ContentAreaBody'>
-                                        <p>{TheSortedArray[CurrentProjectSet]?.[1]?.Description1 || ""}</p>
-                                    </div>
-                                    <div className='ContentAreaBody'>
-                                        <img style={{width: "45%", cursor: "pointer", borderRadius: "1rem"}} onClick={() => {
-                                            setDisplayWindow(true)
-                                            setDisplayImage(TheSortedArray[CurrentProjectSet]?.[1]?.Img1)
-                                        }} className='ContentAreaBodyImage1' src={`${process.env.PUBLIC_URL}${TheSortedArray[CurrentProjectSet]?.[1]?.Img1}` || ""} alt="" />
 
-                                        { TheSortedArray[CurrentProjectSet]?.[1]?.Img2 ? <img style={{width: "45%", cursor: "pointer", borderRadius: "1rem"}} onClick={() => {
-                                            setDisplayWindow(true)
-                                            setDisplayImage(TheSortedArray[CurrentProjectSet]?.[1]?.Img2)
-                                        }} className='ContentAreaBodyImage2' src={`${process.env.PUBLIC_URL}${TheSortedArray[CurrentProjectSet]?.[1]?.Img2}` || ""} alt="" /> : null}
+                    <article onMouseMove={!DisplayWindow ? handleMouseMove : undefined} onMouseLeave={handleMouseLeave} style={{zIndex: '3'}} onClick={() => {
+                                setDisplayWindow(true)
+                                handleMouseLeave()
+                                setDisplayProjectData(TheSortedArray[CurrentProjectSet]?.[1])
+                            }}> 
+                        <button className='DefaultButton'>
+                            <article className={DisplayWindow ? "DisplayedWindow" : "BaseMainProjectContainer"}>
+                                <article ref={ProjectCardRef} style={DisplayImage ? {border: "None"} : DisplayWindow ? {} : WinWidth < 730 ? { width: '80vw', height: '80vw' } : WinWidth < 850 ? { width: '65vw', height: '65vw' } : WinWidth < 1220 ? { width: '50vw', height: '50vw' } : {}} className='MainProject'>
+
+                                    {!DisplayWindow && <div className='ContentArea'>
+                                        <div className="ContentTitle">
+                                            {TheSortedArray[CurrentProjectSet]?.[1]?.ProjectTitle || ""}
+                                        </div>
+                                        <div className='ContentAreaBody'>
+                                                <p>{TheSortedArray[CurrentProjectSet]?.[1]?.Description1 || ""}</p>
+                                            </div>
+                                            <div className='ContentAreaBody'>
+                                                <img style={{width: "45%", cursor: "pointer", borderRadius: "1rem"}} onClick={() => {
+                                                    setDisplayWindow(true)
+                                                    setDisplayImage(TheSortedArray[CurrentProjectSet]?.[1]?.Img1)
+                                                }} className='ContentAreaBodyImage1' src={`${process.env.PUBLIC_URL}${TheSortedArray[CurrentProjectSet]?.[1]?.Img1}` || ""} alt="" />
+
+                                                { TheSortedArray[CurrentProjectSet]?.[1]?.Img2 ? <img style={{width: "45%", cursor: "pointer", borderRadius: "1rem"}} onClick={() => {
+                                                    setDisplayWindow(true)
+                                                    setDisplayImage(TheSortedArray[CurrentProjectSet]?.[1]?.Img2)
+                                                }} className='ContentAreaBodyImage2' src={`${process.env.PUBLIC_URL}${TheSortedArray[CurrentProjectSet]?.[1]?.Img2}` || ""} alt="" /> : null}
+                                            </div>
+                                            <div>
+                                                <h3 className='ProjectViewMore'>{TheSortedArray[CurrentProjectSet]?.[1]?.ProjectTitle ? "View More" : ""}</h3>
+                                            </div>
+                                    </div>}
+
+                                    {DisplayImage && 
+                                        <article>
+                                            <div>
+                                                <img style={{borderRadius: "2rem", height: "inherit"}} src={`${process.env.PUBLIC_URL}${DisplayImage}`} alt='ClickedImageOne'></img>
+                                            </div>
+                                        </article>}
+                                    
+                                    {DisplayProjectData && !DisplayImage && <div>
+                                        <article className='DisplayedWindowData'>
+                                            <h2 className='DisplayedWindowTitle'>{DisplayProjectData.ProjectTitle || ""}</h2>
+                                            <span className='ProjectSkillCarousel'>
+                                                <div className='ProjectSkillsCarouselTrack'>
+                                                    {
+                                                    [...DisplayProjectData.TechUsed, ...DisplayProjectData.TechUsed, ...DisplayProjectData.TechUsed].map((Skill, index) => (
+                                                        <div className='ProjectSkills'>
+                                                            {Skill}
+                                                        </div>
+                                                    )
+                                                    )}
+                                                </div>
+                                            </span>
+                                            <a className='ProjectGithubLink' href={DisplayProjectData.Link || null}>View the Code!</a>
+                                            <h4 className='DisplayedWindowMainDesc'>{DisplayProjectData.Description1 || ""}</h4>
+                                            {DisplayProjectData.TryableLink != null &&                         
+                                            <Link className='ProjectTryItOut' role="button" to={DisplayProjectData.TryableLink}>
+                                                Try it out!
+                                            </Link>}
+
+                                            <div className='DisplayedWindowBody'>
+                                                <div className='DisplayedWindowBodyRow1'>
+                                                    <img onClick={() => {
+                                                        setDisplayWindow(true)
+                                                        setDisplayImage(DisplayProjectData.Img1)
+                                                    }} style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img1}` || ""} alt="" />
+                                                    <p style={{maxWidth: "35rem", textAlign: "center"}} >{DisplayProjectData.Description2 || ""}</p>
+                                                </div>
+                                                <div onClick={() => {
+                                                        setDisplayWindow(true)
+                                                        setDisplayImage(DisplayProjectData.Img2)
+                                                    }} className='DisplayedWindowBodyRow2'>
+                                                    <p style={{maxWidth: "35rem", textAlign: "center"}}>{DisplayProjectData.Description3 || ""}</p>
+                                                    <img  style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img2}` || ""} alt="" />
+                                                </div>
+                                                <div onClick={() => {
+                                                        setDisplayWindow(true)
+                                                        setDisplayImage(DisplayProjectData.Img3)
+                                                    }} className='DisplayedWindowBodyRow3'>
+                                                    <img style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img3}` || ""} alt="" />
+                                                    <p style={{maxWidth: "35rem", textAlign: "center"}}>{DisplayProjectData.Description4 || ""}</p>
+                                                </div>
+                                                <div onClick={() => {
+                                                        setDisplayWindow(true)
+                                                        setDisplayImage(DisplayProjectData.Img4)
+                                                    }} className='DisplayedWindowBodyRow4'>
+                                                    <p style={{maxWidth: "35rem", textAlign: "center"}}>{DisplayProjectData.Description5 || ""}</p>
+                                                    <img style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img4}` || ""} alt="" />
+                                                </div>
+                                            </div>
+                                        </article>
                                     </div>
-                                    <div>
-                                        <h3 className='ProjectViewMore'>{TheSortedArray[CurrentProjectSet]?.[1]?.ProjectTitle ? "View More" : ""}</h3>
-                                    </div>
-                            </div>
-                        </article>
-                    </button>
+                                    }
+
+
+
+                                </article>
+                            </article>
+                        </button>
+                    </article>
                     
-                    {WinWidth < 1000 && (
+
+
+
+
+                    
+                    {!DisplayWindow && WinWidth < 1000 && (
                         <button style={{padding: "0.8rem", marginLeft: "-2.5rem", marginRight: "-2.5rem"}} className='RightTriangleButton' onClick={MoveRight}>
                             <div style={{transform: "scale(0.8)"}} className='RightAlignedButton'>
                                 <div className='RightTriangle'></div>
@@ -189,7 +290,7 @@ export default function Projects() {
                     )}
 
 
-                    {WinWidth > 1000 && (
+                    {!DisplayWindow && WinWidth > 1000 && (
                         <button className='DefaultButton' onClick={MoveRight}>
                             <article role='button' className='RightProject'>
                                 <div className='ContentArea'>
@@ -201,7 +302,7 @@ export default function Projects() {
                         </button>
                     )}
                 </article>
-                <article className='UpDownButtons'>
+                {!DisplayWindow && <article className='UpDownButtons'>
                     <div>
                         {CurrentProjectSet > 0 && <button className='UpTriangleButton' onClick={MoveUp}>
                             <div className='UpAlignedButton'>
@@ -214,9 +315,14 @@ export default function Projects() {
                             </div>
                         </button>}
                     </div>
-                </article>
+                </article>}
             </section>}
-            {DisplayWindow && <section className='DisplayedWindow' >
+
+
+
+
+
+            {/* {DisplayWindow && <section className='DisplayedWindow' >
                 {DisplayImage && <div className='ProjectImageBackButton' onClick={() => {
                         setDisplayImage(null)
                         setDisplayWindow(true)
@@ -297,7 +403,7 @@ export default function Projects() {
                             </div>
                         </article>
                     }
-            </section>}
+            </section>} */}
         </>
     );
 }  
