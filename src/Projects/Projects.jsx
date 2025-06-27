@@ -192,15 +192,9 @@ export default function Projects() {
                                                 <p>{TheSortedArray[CurrentProjectSet]?.[1]?.Description1 || ""}</p>
                                             </div>
                                             <div className='ContentAreaBody'>
-                                                <img style={{width: "45%", cursor: "pointer", borderRadius: "1rem"}} onClick={() => {
-                                                    setDisplayWindow(true)
-                                                    setDisplayImage(TheSortedArray[CurrentProjectSet]?.[1]?.Img1)
-                                                }} className='ContentAreaBodyImage1' src={`${process.env.PUBLIC_URL}${TheSortedArray[CurrentProjectSet]?.[1]?.Img1}` || ""} alt="" />
+                                                <img style={{width: "45%", cursor: "pointer", borderRadius: "1rem"}} className='ContentAreaBodyImage1' src={`${process.env.PUBLIC_URL}${TheSortedArray[CurrentProjectSet]?.[1]?.Img1}` || ""} alt="" />
 
-                                                { TheSortedArray[CurrentProjectSet]?.[1]?.Img2 ? <img style={{width: "45%", cursor: "pointer", borderRadius: "1rem"}} onClick={() => {
-                                                    setDisplayWindow(true)
-                                                    setDisplayImage(TheSortedArray[CurrentProjectSet]?.[1]?.Img2)
-                                                }} className='ContentAreaBodyImage2' src={`${process.env.PUBLIC_URL}${TheSortedArray[CurrentProjectSet]?.[1]?.Img2}` || ""} alt="" /> : null}
+                                                { TheSortedArray[CurrentProjectSet]?.[1]?.Img2 ? <img style={{width: "45%", cursor: "pointer", borderRadius: "1rem"}} className='ContentAreaBodyImage2' src={`${process.env.PUBLIC_URL}${TheSortedArray[CurrentProjectSet]?.[1]?.Img2}` || ""} alt="" /> : null}
                                             </div>
                                             <div>
                                                 <h3 className='ProjectViewMore'>{TheSortedArray[CurrentProjectSet]?.[1]?.ProjectTitle ? "View More" : ""}</h3>
@@ -230,6 +224,7 @@ export default function Projects() {
                                             </span>
                                             <a className='ProjectGithubLink' href={DisplayProjectData.Link || null}>View the Code!</a>
                                             <h4 className='DisplayedWindowMainDesc'>{DisplayProjectData.Description1 || ""}</h4>
+                                            <div className='SeperatorLine'></div>
                                             {DisplayProjectData.TryableLink != null &&                         
                                             <Link className='ProjectTryItOut' role="button" to={DisplayProjectData.TryableLink}>
                                                 Try it out!
@@ -241,27 +236,30 @@ export default function Projects() {
                                                         setDisplayWindow(true)
                                                         setDisplayImage(DisplayProjectData.Img1)
                                                     }} style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img1}` || ""} alt="" />
-                                                    <p style={{maxWidth: "35rem", textAlign: "center"}} >{DisplayProjectData.Description2 || ""}</p>
+                                                    <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "left", maxWidth: "35rem"}}> {DisplayProjectData.Description2 || ""}</p>
+                                                    <div className='MiniSeperatorLine'></div>
                                                 </div>
                                                 <div onClick={() => {
                                                         setDisplayWindow(true)
                                                         setDisplayImage(DisplayProjectData.Img2)
                                                     }} className='DisplayedWindowBodyRow2'>
-                                                    <p style={{maxWidth: "35rem", textAlign: "center"}}>{DisplayProjectData.Description3 || ""}</p>
+                                                    <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "right", maxWidth: "35rem"}}>{DisplayProjectData.Description3 || ""}</p>
                                                     <img  style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img2}` || ""} alt="" />
+                                                    <div className='MiniSeperatorLine'></div>
                                                 </div>
                                                 <div onClick={() => {
                                                         setDisplayWindow(true)
                                                         setDisplayImage(DisplayProjectData.Img3)
                                                     }} className='DisplayedWindowBodyRow3'>
                                                     <img style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img3}` || ""} alt="" />
-                                                    <p style={{maxWidth: "35rem", textAlign: "center"}}>{DisplayProjectData.Description4 || ""}</p>
+                                                    <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "left", maxWidth: "35rem"}}>{DisplayProjectData.Description4 || ""}</p>
+                                                    <div className='MiniSeperatorLine'></div>
                                                 </div>
                                                 <div onClick={() => {
                                                         setDisplayWindow(true)
                                                         setDisplayImage(DisplayProjectData.Img4)
                                                     }} className='DisplayedWindowBodyRow4'>
-                                                    <p style={{maxWidth: "35rem", textAlign: "center"}}>{DisplayProjectData.Description5 || ""}</p>
+                                                    <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "right", maxWidth: "35rem"}}>{DisplayProjectData.Description5 || ""}</p>
                                                     <img style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img4}` || ""} alt="" />
                                                 </div>
                                             </div>

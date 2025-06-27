@@ -380,7 +380,7 @@
 }
 
 .DefaultButton{
-    transition: all 2.5s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .DisplayedWindow > article{
@@ -393,7 +393,7 @@
     z-index: 1001;
     font-family: 'Poppins', serif;
     font-weight: 500;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease;
     background-color: #070e1475;
 }
 
@@ -551,10 +551,28 @@
 .ContentAreaBodyImage1, .ContentAreaBodyImage2{
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
     z-index: 5rem;
+    transition: all 0.3s ease;
 }
 
 .DisplayArticle{
     z-index: 3;
+}
+
+.SeperatorLine{
+    height: 2px;
+    width: 85%;
+    background-color: #e2e2e2;
+    border-radius: 10rem;
+    margin-bottom: 3rem;
+}
+
+.MiniSeperatorLine{
+    height: 2px;
+    width: 75%;
+    background-color: #e2e2e2;
+    border-radius: 10rem;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
 }
 
 @keyframes ScrollLeft {
