@@ -16,6 +16,7 @@ export default function Projects() {
     const [DisplayImage, setDisplayImage] = useState(null);
     const [DisplayProjectData, setDisplayProjectData] = useState(null);
     const [AnimateMainProjectTest, setAnimateMainProjectText] = useState(false);
+    const [DisplayContent, setDisplayContent] = useState(false)
     const ProjectCardRef = useRef(null);
 
     function handleMouseMove(e){
@@ -68,6 +69,14 @@ export default function Projects() {
         setAnimateMainProjectText(true);
         }, 100);
     }, []);
+
+    
+useEffect(() => {
+    if (DisplayProjectData && !DisplayImage) {
+        const timer = setTimeout(() => setDisplayContent(true), 1000);
+        return () => clearTimeout(timer);
+    }
+}, [DisplayProjectData, DisplayImage]);
 
     function MoveRight() {
         SetSortedArray(prevArray => {
@@ -138,6 +147,7 @@ export default function Projects() {
                                                 setDisplayImage(null)
                                                 setDisplayWindow(false)
                                                 setDisplayProjectData(null)
+                                                setDisplayContent(false)
                                             }}>
                                             <div className='Cross'>
                                                 <div className='BurgerMenuOpen'>
@@ -209,7 +219,7 @@ export default function Projects() {
                                         </article>}
                                     
                                     {DisplayProjectData && !DisplayImage && <div>
-                                        <article className='DisplayedWindowData'>
+                                        <article className={`DisplayedWindowData ${DisplayContent ? 'FadeIn' : ''}`}>
                                             <h2 className='DisplayedWindowTitle'>{DisplayProjectData.ProjectTitle || ""}</h2>
                                             <span className='ProjectSkillCarousel'>
                                                 <div className='ProjectSkillsCarouselTrack'>
