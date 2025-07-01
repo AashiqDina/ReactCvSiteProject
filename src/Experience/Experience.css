@@ -19,10 +19,11 @@
     background-color: rgba(240, 248, 255, 0);
     border: 1px solid white;
     border-radius: 10rem;
+    overflow: hidden;
 }
 
 .FilledPart{
     height: 100%;
     background-color: #e2e2e2;
-    border-radius: 10rem 0rem 0rem 10rem;
+    border-radius: 10rem 10rem 10rem 10rem;
 }
