@@ -194,7 +194,7 @@ useEffect(() => {
                             <article className={DisplayWindow ? "DisplayedWindow" : "BaseMainProjectContainer"}>
                                 <article ref={ProjectCardRef} style={DisplayImage ? {border: "None"} : DisplayWindow ? {} : WinWidth < 730 ? { width: '80vw', height: '80vw' } : WinWidth < 850 ? { width: '65vw', height: '65vw' } : WinWidth < 1220 ? { width: '50vw', height: '50vw' } : {}} className='MainProject'>
 
-                                    {!DisplayWindow && <div className='ContentArea'>
+                                    {<div className={!DisplayWindow ? 'ContentArea' : "ContentArea Disappear"}>
                                         <div className="ContentTitle">
                                             {TheSortedArray[CurrentProjectSet]?.[1]?.ProjectTitle || ""}
                                         </div>
