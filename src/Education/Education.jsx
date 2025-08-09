@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react'
-import { motion } from 'framer-motion'
+import { motion, scale } from 'framer-motion'
 import Header from '../Header.jsx'
 import StarryBackground from '../StarryBackground'
 import './Education.css'
@@ -99,7 +99,7 @@ export default function Education(){
                                                             <div className='TleOtherInformation'>
                                                                 {Point.SubjecsModulesWithGrades.map((SubMod, index) => {
                                                                     return (
-                                                                        <span className='SubMod'>{SubMod}</span>
+                                                                        <span className='SubMod' >{SubMod}</span>
                                                                     )
                                                                 })}
                                                             </div>

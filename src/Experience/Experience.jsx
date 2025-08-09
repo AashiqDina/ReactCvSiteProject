@@ -3,7 +3,7 @@ import Header from "../Header"
 import StarryBackground from "../StarryBackground"
 import PageTitle from "../PageTitle"
 import ExperienceData from "./ExperienceData"
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Experience(){
 const [Level, setLevel] = useState(1);
@@ -37,7 +37,6 @@ const [CurrentExperience, setCurrentExperience] = useState(0);
     if (Xp !== CurrentExperience) setCurrentExperience(Xp);
     }, [CurrentExperience]);
 
-    console.log("Level", Level)
     return (
         <>
             <Header/>
@@ -47,11 +46,15 @@ const [CurrentExperience, setCurrentExperience] = useState(0);
             <section className="LevelSection">
                 <article className="ExperienceBarContainer">
                     <div className="ExperienceBar">
+                        <h3 className='Experience'>{Math.floor(CurrentExperience*10)}/{Math.floor(ExperienceMax*10)}</h3>
                         <div className="FilledPart" style={{width: `${CurrentExperience/ExperienceMax * 100}%`, overflow: "hidden"}}></div>
                     </div>
                 </article>
-            </section>#
-            <h2>{Level}</h2>
+                <article className='LevelInformationContainer'>
+                    <h2 className='Level'>Level {Level}</h2>
+                </article>
+
+            </section>
         </>
     )
 }

@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     flex-wrap: wrap;
 }
 
@@ -26,4 +27,38 @@
     height: 100%;
     background-color: #e2e2e2;
     border-radius: 10rem 10rem 10rem 10rem;
+}
+
+.Level{
+    color: white;
+    font-size: clamp(2.5rem, 0.8vw, 20rem);
+    text-align: center;
+    font-family: 'Poppins', serif;
+    font-weight: 500;
+}
+
+.LevelInformationContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.Experience{
+    position: absolute;
+    left: 50%;  /* Move to the middle horizontally */
+    transform: translate(-50%); /* Offset by half its own size */
+    margin-top: 0;
+    margin-bottom: -3rem;
+    color: rgb(0, 0, 0);
+  text-shadow: 
+    1px 1px 0 #e2e2e2,
+   -1px 1px 0 #e2e2e2,
+    1px -1px 0 #e2e2e2,
+   -1px -1px 0 #e2e2e2;
+    font-size: clamp(2rem, 0.5vw, 15rem);
+    text-align: center;
+    font-family: 'Poppins', serif;
+    font-weight: 500;
 }

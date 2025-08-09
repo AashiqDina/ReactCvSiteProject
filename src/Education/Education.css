@@ -245,13 +245,13 @@ html {
 }
 
 .TimelineCross:hover{
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 .TimeLineExpandedLeaveContainer{
     display: flex;
-    align-items: flex-end;
-    justify-content: end;
+    align-items: center;
+    justify-content: flex-end;
     width: inherit;
     transition: all 1s ease-in-out;
 }
@@ -259,7 +259,6 @@ html {
 .InnerPoint{
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
     flex-direction: column;
     width: 99%;
     height: 99%;
@@ -269,7 +268,7 @@ html {
 }
 
 .TimeLineExpandedTitle > h6{
-    font-size: clamp(1rem, 5vw, 2rem);
+    font-size: clamp(1rem, 4vw, 2rem);
     font-family: 'Poppins', serif;
     font-weight: 500;
     transition: all 1s ease-in-out;
@@ -290,7 +289,8 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 5rem;
+    width: 3rem;
+    font-size: clamp(0.8rem, 1.7vw, 1rem);
 }
 
 .Seperator{
@@ -304,10 +304,15 @@ html {
     margin-right: 1rem;
     margin-left: 1rem;
     margin-bottom: 1rem;
-
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+    width: inherit;
+    transition: all 1s ease-in-out;
 }
 
 .TleDesc{
+    font-size: clamp(0.6rem, 1.7vw, 1rem);
     margin-bottom: 1rem;
 }
 
@@ -316,14 +321,19 @@ html {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 3rem;
+    gap: clamp(0.5rem, 1.7vw, 1rem);
+    margin-top: 0.5rem;
+    transform-origin: top center;
 }
 
 .SubMod{
     background-color: #070e14b7;
-    padding: 1rem;
+    padding: clamp(0.6rem, 1.5vw, 1rem);
     border-radius: 5rem;
+    transition: all 0.5s ease-in-out;
+    font-size: clamp(0.6rem, 1.5vw, 1rem);
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
 }
 
 .SubMod:hover{
