@@ -35,6 +35,7 @@
     text-align: center;
     font-family: 'Poppins', serif;
     font-weight: 500;
+    margin: 0;
 }
 
 .LevelInformationContainer{
@@ -62,3 +63,132 @@
     font-family: 'Poppins', serif;
     font-weight: 500;
 }
+
+.JobExperience{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #e2e2e201;
+    border-color: #e2e2e252;
+    border-style: solid;
+    border-width: 0.1rem;
+    padding: 0.5rem;
+    margin: 2rem;
+    border-radius: 5rem;
+    color: #e2e2e2;
+    font-family: 'Poppins', serif;
+    cursor: pointer;
+    transition: all 1s ease-in-out;
+}
+
+.JobExperienceFirstRow > h3{
+    margin-top: 0;
+    font-size: clamp(1.1rem, 4vw, 2.2rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.JobExperienceFirstRow > p{
+    margin: 0;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    text-align: right;
+}
+
+
+.JobExperienceFirstRow > h3, .JobExperience > h4{
+    margin-bottom: 0;
+}
+
+.JobExperience > h4{
+    margin-left: 1rem;
+    margin-top: 0.1rem;
+    margin-bottom: 2rem;
+    font-size: clamp(0.8rem, 3vw, 1.35rem);
+    font-weight: 500;
+}
+
+.JobExperienceFirstRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+}
+
+.JobExperienceFirstRowRight{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.JobExperienceSectionOne{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.JobExperienceExpandedSection{
+    margin-left: 1rem;
+    margin-right: 1rem;
+    animation-name: fadeIn;
+    animation-iteration-count: 1;
+    animation-duration: 3s;
+    margin-bottom: 1rem;
+}
+
+.JobExperienceExpandedSectionDivided{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.JobExperienceExpandedSectionLeft{
+    font-size: clamp(0.8rem, 1.3vw, 10rem);
+    width: 50%;
+}
+
+.JobExperienceExpandedSectionRight{
+    font-size: clamp(0.8rem, 1.3vw, 10rem);
+    width: 50%;
+}
+
+.ExperienceSkills{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.ExperienceSkills > span{
+    border: 1px solid white;
+    border-radius: 2rem;
+    padding: 0.5rem;
+}
+
+.CompanyLogo{
+    margin-right: 1rem;
+    border-radius: 20rem;
+    width: 3rem;
+}
+
+.JobExperienceExpandedSection > p{
+    font-size: clamp(0.8rem, 1.3vw, 10rem);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to{
+        opacity: 1;  
+    }
+}
+
