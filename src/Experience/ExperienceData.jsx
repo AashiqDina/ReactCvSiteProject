@@ -19,7 +19,7 @@ export default function ExperienceData(){
                 Company: "Freelance",
                 Dates: {
                     Start: "2024-09",
-                    End: "2025-06"
+                    End: "2026-02"
                 },
                 Description: "I offer personalised tutoring for students of all levels, helping them understand core computing concepts, programming languages and problem-solving techniques. From explaining data structures and algorithms to guiding through practical coding exercies, I focus on making complex topics clear and engaging. My approach blends theory with hands-on examples so students can confidently apply what they learn to coursework, projects and real-world challenges",
                 Highlights: ["Mentored 7 students in modern frontend fundamentals (DOM, React, HTML/CSS), boosting assignment scores by 15% and cutting debug time by 20%.", "Guided students on collaborative coding, Agile workflows, and complex systems debugging, building skills transferable to fast-paced tech environments."],

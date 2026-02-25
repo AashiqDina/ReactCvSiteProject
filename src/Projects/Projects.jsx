@@ -1,11 +1,9 @@
-import Header from '../Header.jsx';
-import '../Header.css';
-import StarryBackground from '../StarryBackground.jsx';
+import Header from '../Header/Header.jsx';
+import StarryBackground from '../Background/StarryBackground.jsx';
 import './Projects.css';
 import { useEffect, useState, useRef } from 'react';
 import ProjectData from './ProjectData.jsx'
-import { Link } from 'react-router-dom'
-import PageTitle from '../PageTitle.jsx';
+import PageTitle from '../Functions/PageTitle.jsx';
 
 
 export default function Projects() {
@@ -17,22 +15,41 @@ export default function Projects() {
     const [DisplayProjectData, setDisplayProjectData] = useState(null);
     const [AnimateMainProjectTest, setAnimateMainProjectText] = useState(false);
     const [DisplayContent, setDisplayContent] = useState(false)
+    const [Skills, setSkills] = useState(null)
     const ProjectCardRef = useRef(null);
 
-    function handleMouseMove(e){
+    function applyTilt(clientX, clientY) {
         const ProjCard = ProjectCardRef.current;
         const ArticleSpecs = ProjCard.getBoundingClientRect();
 
-        const xDistanceInArticle = e.clientX - ArticleSpecs.left;
-        const yDistanceInArticle = e.clientY - ArticleSpecs.top;
+        const xDistanceInArticle = clientX - ArticleSpecs.left;
+        const yDistanceInArticle = clientY - ArticleSpecs.top;
 
         const ProjCardCenterX = ArticleSpecs.width / 2;
         const ProjCardCenterY = ArticleSpecs.height / 2;
 
-        const RotateX = ((yDistanceInArticle - ProjCardCenterY) / ProjCardCenterY) * 10;
-        const RotateY = ((xDistanceInArticle - ProjCardCenterX) / ProjCardCenterX) * 10;
+        const RotateX =
+            ((yDistanceInArticle - ProjCardCenterY) / ProjCardCenterY) * 10;
+        const RotateY =
+            ((xDistanceInArticle - ProjCardCenterX) / ProjCardCenterX) * 10;
 
-        ProjCard.style.transform = `perspective(43rem) scale(1.03) rotateX(${-RotateX}deg) rotateY(${RotateY}deg)`
+        ProjCard.style.transform = `
+            perspective(43rem)
+            scale(1.03)
+            rotateX(${-RotateX}deg)
+            rotateY(${RotateY}deg)
+        `;
+    }
+
+    function handleMouseMove(e) {
+        applyTilt(e.clientX, e.clientY);
+    }
+
+    function handleTouchMove(e) {
+        if (!e.touches.length) return;
+
+        const touch = e.touches[0];
+        applyTilt(touch.clientX, touch.clientY);
     }
 
     function handleMouseLeave() {
@@ -177,7 +194,7 @@ useEffect(() => {
                     )}
                     
                     {WinWidth < 1000 && !DisplayWindow && (
-                        <button style={{padding: "0.8rem", marginLeft: "-2.5rem", marginRight: "-2.5rem"}} className='LeftTriangleButton' onClick={MoveLeft}>
+                        <button className='LeftTriangleButton' onClick={MoveLeft}>
                             <div style={{transform: "scale(0.8)"}} className='LeftAlignedButton'>
                                 <div className='LeftTriangle'></div>
                             </div>
@@ -185,9 +202,10 @@ useEffect(() => {
                     )}
 
 
-                    <article onMouseMove={!DisplayWindow ? handleMouseMove : undefined} onMouseLeave={handleMouseLeave} style={{zIndex: '3'}} onClick={() => {
+                    <article onMouseMove={!DisplayWindow ? handleMouseMove : undefined} onMouseLeave={handleMouseLeave} onTouchMove={!DisplayWindow ? handleTouchMove : undefined} onTouchEnd={handleMouseLeave} style={{zIndex: '3'}} onClick={() => {
                                 setDisplayWindow(true)
                                 handleMouseLeave()
+                                setSkills(TheSortedArray[CurrentProjectSet]?.[1].TechUsed)
                                 setDisplayProjectData(TheSortedArray[CurrentProjectSet]?.[1])
                             }}> 
                         <button className='DefaultButton'>
@@ -221,56 +239,68 @@ useEffect(() => {
                                     {DisplayProjectData && !DisplayImage && <div>
                                         <article className={`DisplayedWindowData ${DisplayContent ? 'FadeIn' : ''}`}>
                                             <h2 className='DisplayedWindowTitle'>{DisplayProjectData.ProjectTitle || ""}</h2>
-                                            <span className='ProjectSkillCarousel'>
-                                                <div className='ProjectSkillsCarouselTrack'>
-                                                    {
-                                                    [...DisplayProjectData.TechUsed, ...DisplayProjectData.TechUsed, ...DisplayProjectData.TechUsed].map((Skill, index) => (
-                                                        <div className='ProjectSkills'>
-                                                            {Skill}
+                                            <div className='ProjectSkillSection'>
+                                                <div className='ProjectSkillCarouselContainer'>
+                                                    <div className='ProjectSkillCarouselTrack'>
+                                                        {[...Skills].map((skill, index) => (
+                                                        <div
+                                                            className='ProjectSkills'
+                                                            key={`${skill}-${index % DisplayProjectData.TechUsed.length}`}
+                                                        >
+                                                            {skill}
                                                         </div>
-                                                    )
-                                                    )}
+                                                        ))}
+                                                        {[...Skills].map((skill, index) => (
+                                                        <div
+                                                            className='ProjectSkills'
+                                                            key={`${skill}-${index % DisplayProjectData.TechUsed.length}`}
+                                                        >
+                                                            {skill}
+                                                        </div>
+                                                        ))}
+                                                    </div>
                                                 </div>
-                                            </span>
-                                            <a className='ProjectGithubLink' href={DisplayProjectData.Link || null}>View the Code!</a>
-                                            <h4 className='DisplayedWindowMainDesc'>{DisplayProjectData.Description1 || ""}</h4>
-                                            <div className='SeperatorLine'></div>
-                                            {DisplayProjectData.TryableLink != null &&                         
-                                            <Link className='ProjectTryItOut' role="button" to={DisplayProjectData.TryableLink}>
-                                                Try it out!
-                                            </Link>}
+                                            </div>
+
+                                            <div className='ProjectLinkContainer'>
+                                                <a className='ProjectGithubLink' href={DisplayProjectData.Link || null}>View the Code!</a>                      
+                                                <a className='ProjectGithubLink'  href={DisplayProjectData.TryableLink || null}>Try it out!</a>
+                                            </div>
+                                            {/* <h4 className='DisplayedWindowMainDesc'>{DisplayProjectData.Description1 || ""}</h4> */}
+                                            {/* <div className='SeperatorLine'></div> */}
+
 
                                             <div className='DisplayedWindowBody'>
                                                 <div className='DisplayedWindowBodyRow1'>
+                                                    <img className="ProjectImg" onClick={() => {
+                                                        setDisplayWindow(true)
+                                                        setDisplayImage(DisplayProjectData.Img1)
+                                                    }} style={{width: "20rem", borderRadius: "1rem", cursor: "pointer"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img1}` || ""} alt="" />
+                                                    <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "left", maxWidth: "35rem"}}> {DisplayProjectData.Description1 || ""}</p>
+                                                    {/* <div className='MiniSeperatorLine'></div> */}
+                                                </div>
+                                                <div className='DisplayedWindowBodyRow2'>
+                                                    <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "right", maxWidth: "35rem"}}>{DisplayProjectData.Description2 || ""}</p>
                                                     <img onClick={() => {
                                                         setDisplayWindow(true)
                                                         setDisplayImage(DisplayProjectData.Img1)
-                                                    }} style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img1}` || ""} alt="" />
-                                                    <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "left", maxWidth: "35rem"}}> {DisplayProjectData.Description2 || ""}</p>
-                                                    <div className='MiniSeperatorLine'></div>
+                                                    }} className="ProjectImg" style={{width: "20rem", borderRadius: "1rem", cursor: "pointer"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img2}` || ""} alt="" />
+                                                    {/* <div className='MiniSeperatorLine'></div> */}
                                                 </div>
-                                                <div onClick={() => {
+                                                <div  className='DisplayedWindowBodyRow3'>
+                                                    <img onClick={() => {
                                                         setDisplayWindow(true)
-                                                        setDisplayImage(DisplayProjectData.Img2)
-                                                    }} className='DisplayedWindowBodyRow2'>
-                                                    <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "right", maxWidth: "35rem"}}>{DisplayProjectData.Description3 || ""}</p>
-                                                    <img  style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img2}` || ""} alt="" />
-                                                    <div className='MiniSeperatorLine'></div>
+                                                        setDisplayImage(DisplayProjectData.Img1)
+                                                    }} className="ProjectImg" style={{width: "20rem", borderRadius: "1rem", cursor: "pointer"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img3}` || ""} alt="" />
+                                                    <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "left", maxWidth: "35rem"}}>{DisplayProjectData.Description3 || ""}</p>
+                                                    {/* <div className='MiniSeperatorLine'></div> */}
                                                 </div>
-                                                <div onClick={() => {
+                                                <div className='DisplayedWindowBodyRow4'>
+                                                    <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "right", maxWidth: "35rem"}}>{DisplayProjectData.Description4 || ""}</p>
+                                                    <img onClick={() => {
                                                         setDisplayWindow(true)
-                                                        setDisplayImage(DisplayProjectData.Img3)
-                                                    }} className='DisplayedWindowBodyRow3'>
-                                                    <img style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img3}` || ""} alt="" />
-                                                    <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "left", maxWidth: "35rem"}}>{DisplayProjectData.Description4 || ""}</p>
-                                                    <div className='MiniSeperatorLine'></div>
-                                                </div>
-                                                <div onClick={() => {
-                                                        setDisplayWindow(true)
-                                                        setDisplayImage(DisplayProjectData.Img4)
-                                                    }} className='DisplayedWindowBodyRow4'>
-                                                    <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "right", maxWidth: "35rem"}}>{DisplayProjectData.Description5 || ""}</p>
-                                                    <img style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img4}` || ""} alt="" />
+                                                        setDisplayImage(DisplayProjectData.Img1)
+                                                    }} className="ProjectImg" style={{width: "20rem", borderRadius: "1rem", cursor: "pointer"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img4}` || ""} alt="" />
                                                 </div>
                                             </div>
                                         </article>
@@ -290,7 +320,7 @@ useEffect(() => {
 
                     
                     {!DisplayWindow && WinWidth < 1000 && (
-                        <button style={{padding: "0.8rem", marginLeft: "-2.5rem", marginRight: "-2.5rem"}} className='RightTriangleButton' onClick={MoveRight}>
+                        <button className='RightTriangleButton' onClick={MoveRight}>
                             <div style={{transform: "scale(0.8)"}} className='RightAlignedButton'>
                                 <div className='RightTriangle'></div>
                             </div>

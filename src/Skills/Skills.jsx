@@ -1,9 +1,9 @@
-import Header from "../Header"
-import StarryBackground from "../StarryBackground"
+import Header from "../Header/Header.jsx"
+import StarryBackground from "../Background/StarryBackground"
 import './Skills.css'
 import { useEffect, useState } from "react"
 import SkillsData from "./SkillsData"
-import PageTitle from "../PageTitle"
+import PageTitle from "../Functions/PageTitle"
 
 export default function Skills(){
     const [WinWidth, setWinWidth] = useState(window.innerWidth);

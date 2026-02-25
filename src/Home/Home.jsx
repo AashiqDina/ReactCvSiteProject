@@ -1,7 +1,7 @@
-import Header from '../Header.jsx'
-import '../Header.css'
+import Header from '../Header/Header.jsx'
+import '../Header/Header.css'
 import './Home.css'
-import StarryBackground from '../StarryBackground.jsx'
+import StarryBackground from '../Background/StarryBackground.jsx'
 import { Link } from 'react-router-dom'
 
 export default function Home(){

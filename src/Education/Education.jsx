@@ -1,10 +1,10 @@
 import { useState, useEffect} from 'react'
 import { motion, scale } from 'framer-motion'
-import Header from '../Header.jsx'
-import StarryBackground from '../StarryBackground'
+import Header from '../Header/Header.jsx'
+import StarryBackground from '../Background/StarryBackground.jsx'
 import './Education.css'
 import EducationData from './EducationData.jsx'
-import PageTitle from '../PageTitle.jsx'
+import PageTitle from '../Functions/PageTitle.jsx'
 export default function Education(){
     const [WinWidth, setWinWidth] = useState(window.innerWidth);
     const [ShowTimeline, setShowTimeline] = useState(false)
@@ -34,15 +34,15 @@ export default function Education(){
             <section className='EducationContentBody'>
                 {!ShowTimeline && <article className='EducationSummarySection'>
                     <div>
-                        <h4 style={WinWidth < 500 ? {fontSize: "0.9rem"} : {fontSize: "1.1rem"}}>Queen Mary University of London<br />
+                        <h4>Queen Mary University of London<br />
                         Bachelor of Science (Hons)</h4>
-                        <p style={WinWidth < 500 ? {fontSize: "0.7rem"} : {fontSize: "1.1rem"}}>Computer Science <br />
+                        <p>Computer Science <br />
                         Upper Second-Class Honours (2:1) - 69.7%</p>
                     </div>
                     <div>
-                        <h4 style={WinWidth < 500 ? {fontSize: "0.9rem"} : {fontSize: "1.1rem"}}>The City Academy, Hackney<br />
+                        <h4>
                         A-Levels</h4>
-                        <p style={WinWidth < 500 ? {fontSize: "0.7rem"} : {fontSize: "1.1rem"}}>Mathematics - B<br />
+                        <p>Mathematics - B<br />
                         Physics - B<br />
                         Three-Dimensional Design - A</p>
                     </div>

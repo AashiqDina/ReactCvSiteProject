@@ -5,8 +5,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     background-color: #04080c05;
-    margin: 1rem;
-    margin-top: 2rem;
+	margin: 0rem 1rem 1rem 1rem;
     padding: 1rem;
     border-radius: 10rem;
 }
@@ -17,11 +16,12 @@
     justify-content: center;
     margin: 0;
     color: #E5E5E5;
-    font-size: clamp(2.5rem, 1vw, 20rem);
+    font-size: 2.5rem;
     text-align: center;
     z-index: 2;
     font-family: 'Poppins', serif;
     font-weight: 500;
+    transition: all 0.5s ease-in-out;
 }
 
 .HeaderTitle:hover{
@@ -202,6 +202,52 @@ button::before {
 
 button:hover::before {
     opacity: 1;
+}
+
+@media (max-width: 800px) {
+    .HeaderTitle{
+        font-size: 2rem;
+    }
+
+    .BurgerMenu{
+        scale: 0.8;
+    }
+
+    .DropDownMenu{
+        top: 7rem;
+    }
+
+    .ButtonsCollection{
+        gap: 0.5rem;
+    }
+
+    .ButtonsCollection > a > button{
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .PageHeader{
+        margin-right: 0.1rem;
+        margin-bottom: 2rem;
+    }
+
+    .HeaderTitle {
+        font-size: 1.8rem;
+    }
+
+    .DropDownMenu{
+        top: 5rem;
+    }
+
+    .ButtonsCollection{
+        gap: 0.5rem;
+    }
+
+    .ButtonsCollection > a > button{
+        font-size: 1.2rem;
+    }
 }
 
 @keyframes animatedBorder {

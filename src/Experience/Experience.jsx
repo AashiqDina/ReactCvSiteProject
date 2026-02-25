@@ -1,7 +1,7 @@
 import './Experience.css'
-import Header from "../Header"
-import StarryBackground from "../StarryBackground"
-import PageTitle from "../PageTitle"
+import Header from "../Header/Header"
+import StarryBackground from "../Background/StarryBackground"
+import PageTitle from "../Functions/PageTitle"
 import ExperienceData from "./ExperienceData"
 import { useEffect, useState } from 'react'
 

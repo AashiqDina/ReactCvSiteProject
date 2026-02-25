@@ -22,7 +22,7 @@ export default function Header(){
             </button>
 
 
-            <div style={WinWidth < 500 ? {transform: "scale(0.8)"} : {}} className={`DropDownMenu ${BurgerMenuClicked ? "DropDownMenuClicked" : ""}`}>
+            <div className={`DropDownMenu ${BurgerMenuClicked ? "DropDownMenuClicked" : ""}`}>
                 <div className='ButtonsCollection'>
                     <Link style={{color:'white'}} to="/">
                         <button>Home</button>
