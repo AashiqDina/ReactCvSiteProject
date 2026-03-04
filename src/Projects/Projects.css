@@ -1,3 +1,9 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  height: 100vh;
+}
 .ProjectsTitleSection{
     display: flex;
     align-items: center;
@@ -18,10 +24,10 @@
     mask-image: linear-gradient(to top, transparent 1%, white 35%);
 }
 
-.MainProject{
+.MainProject, .MainProjectEnlarged{
     background-color: #070e14d0;
-    width: 33vw;
-    height: 33vw;
+    /* width: 33vw;
+    height: 33vw; */
     color: white;
     border-radius: 2rem;
     display: flex;
@@ -344,6 +350,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    /* gap: 10rem; */
 }
 
 .ProjectViewMore{
@@ -398,14 +405,26 @@
 
 .DisplayedWindow{
     /* background-color: rgba(0, 0, 0, 0.61); */
-    background: linear-gradient(180deg, #04080ced, #101b314d);
-    position: fixed;
+    /* background: linear-gradient(180deg, #04080ced, #101b314d); */
+    position: relative;
     top: 0%;
-    left: 0%;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1000;
-    /* transition: all 1s ease-in-out; */
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 33vw;
+    height: 33vw;
+    /* height: 30rem;
+    width: 30rem; */
+    transition: all 0.5s ease-in-out;
+    z-index: 10;
+    /* width: 100vw;
+    height: 100vh; */
+    /* z-index: 1000; */
+    /* transition: all 1s ease-in-out; */   
+}
+
+.DisplayedWindow:focus{
+    outline: none;
+    border: 1px white solid;
 }
 
 .DefaultButton{
@@ -444,13 +463,27 @@
     font-weight: 500;
 }
 
-.Cross{
+.crossContainer{
+    all: unset;
+}
+
+.crossContainer > button{
     position: fixed;
     top: 3rem;
     right: 2rem;
     z-index: 1002;
-    height: inherit;
+    padding: 0.5rem 0.5rem;
 }
+
+.crossContainer > button:hover{
+    scale: 1.1;
+    transition: all 0.5s ease-in-out;
+}
+
+.crossContainer > button::before{
+    all: unset;
+}
+
 
 .ProjectImageBackButton{
     position: fixed;
@@ -560,6 +593,7 @@
     -webkit-text-fill-color: transparent;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    font-size: 1.2rem;
 }
 
 .ProjectGithubLink:hover{
@@ -693,6 +727,69 @@
         border-radius: 3rem;
     }
 
+}
+
+@media (max-width: 1200px) {
+    .DisplayedWindow{
+        width: 30rem;
+        height: 30rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .DisplayedWindow{
+        width: 27rem;
+        height: 27rem;
+    }
+
+    .ContentAreaBody > p{
+        font-size: 0.8rem;
+        margin: 0;
+    }
+
+    .ProjectViewMore{
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .DisplayedWindow{
+        width: 24rem;
+        height: 24rem;
+    }
+
+    .ContentAreaBody > p{
+        font-size: 0.7rem;
+        margin: 0;
+    }
+
+    .ProjectViewMore{
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .DisplayedWindow{
+        width: 20rem;
+        height: 20rem;
+    }
+
+    .ContentAreaBody > p{
+        font-size: 0.7rem;
+        margin: 0;
+    }
+
+    .ProjectViewMore{
+        font-size: 1rem;
+    }
+
+    .RightTriangleButton, .LeftTriangleButton{
+        padding: 0.1rem;
+    }
+
+    .LeftTriangle, .RightTriangle{
+        scale: 0.7;
+    }
 }
 
 @keyframes ScrollLeft {

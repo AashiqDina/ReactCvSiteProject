@@ -18,13 +18,17 @@ export default function Projects() {
     const [Skills, setSkills] = useState(null)
     const ProjectCardRef = useRef(null);
 
+    //_________________________________________________________________________________________
+    //  Tilt Functions
+    //_________________________________________________________________________________________
+
+
     function applyTilt(clientX, clientY) {
         const ProjCard = ProjectCardRef.current;
         const ArticleSpecs = ProjCard.getBoundingClientRect();
 
         const xDistanceInArticle = clientX - ArticleSpecs.left;
         const yDistanceInArticle = clientY - ArticleSpecs.top;
-
         const ProjCardCenterX = ArticleSpecs.width / 2;
         const ProjCardCenterY = ArticleSpecs.height / 2;
 
@@ -56,45 +60,10 @@ export default function Projects() {
         ProjectCardRef.current.style.transform = "scale(1) rotateX(0) rotateY(0)";
     }
 
-    useEffect(() => {
-        const handleResize = () => setWinWidth(window.innerWidth);
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
-
-    useEffect(() => {
-        var Test = ProjectData();
-        var SortedArray = [];
-        var Counter = 1;
-        var ArrayCounter = 0;
-
-        for(let i = 0; i < Test.length; i++){
-            if(Counter === 1){
-                SortedArray.push([Test[i]]);
-            }
-            else if(Counter <= 3){
-                SortedArray[ArrayCounter].push(Test[i]);
-            }
-            if(Counter === 3){
-                Counter = 0;
-                ArrayCounter++;
-            }
-            Counter += 1;
-        }
-        SetSortedArray(SortedArray);
-        const timeout = setTimeout(() => {
-        setAnimateMainProjectText(true);
-        }, 100);
-    }, []);
-
+    //_________________________________________________________________________________________
+    //  Other Functions
+    //_________________________________________________________________________________________
     
-useEffect(() => {
-    if (DisplayProjectData && !DisplayImage) {
-        const timer = setTimeout(() => setDisplayContent(true), 1000);
-        return () => clearTimeout(timer);
-    }
-}, [DisplayProjectData, DisplayImage]);
-
     function MoveRight() {
         SetSortedArray(prevArray => {
             const tempSA = prevArray.map(inner => [...inner]);
@@ -147,6 +116,87 @@ useEffect(() => {
             }, { once: true });
         }
 
+    //_________________________________________________________________________________________
+
+        const MainProject = {
+            backgroundColor: "#070e14d0",
+            width: "100%",
+            height: "100%",
+            color: "white",
+            borderRadius: "2rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "row",
+            gap: "0rem",
+            overflow: "visible",
+            zIndex: 2,
+            cursor: "pointer",
+            transformStyle: "preserve-3d",
+            border: "1px rgba(255, 255, 255, 0.455) solid",
+            perspective: "800px",
+            transition: "all 0.2s ease"
+        };
+
+        const DisplayedWindow ={
+            background: "linear-gradient(180deg, #04080ced, #101b314d)",
+            width: "100vw",
+            height: "100vh",
+            position: "relative",
+            top: "0%",
+            left: "50%",
+            transform: "translate(-50%, 0%)",
+            zIndex: "10",
+        }
+
+
+
+    //_________________________________________________________________________________________
+
+
+    useEffect(() => {
+        const handleResize = () => setWinWidth(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    useEffect(() => {
+        var Test = ProjectData();
+        var SortedArray = [];
+        var Counter = 1;
+        var ArrayCounter = 0;
+
+        for(let i = 0; i < Test.length; i++){
+            if(Counter === 1){
+                SortedArray.push([Test[i]]);
+            }
+            else if(Counter <= 3){
+                SortedArray[ArrayCounter].push(Test[i]);
+            }
+            if(Counter === 3){
+                Counter = 0;
+                ArrayCounter++;
+            }
+            Counter += 1;
+        }
+        SetSortedArray(SortedArray);
+        const timeout = setTimeout(() => {
+        setAnimateMainProjectText(true);
+        }, 100);
+    }, []);
+
+    
+    useEffect(() => {
+        if (DisplayProjectData && !DisplayImage) {
+            const timer = setTimeout(() => setDisplayContent(true), 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [DisplayProjectData, DisplayImage]);
+
+
+
+
+
 
     return (
         <>
@@ -159,22 +209,21 @@ useEffect(() => {
                         <div className='ProjectBackLineOne'></div>
                         <div className='ProjectBackLineTwo'></div>
                     </div>}
-                {DisplayWindow && <div>
-                    <button className='DefaultButton' onClick={() => {
-                                                setDisplayImage(null)
-                                                setDisplayWindow(false)
-                                                setDisplayProjectData(null)
-                                                setDisplayContent(false)
-                                            }}>
-                                            <div className='Cross'>
-                                                <div className='BurgerMenuOpen'>
-                                                    <div className='BurgerOneOpen'></div>
-                                                    <div className='BurgerTwoOpen'></div>
-                                                    <div className='BurgerThreeOpen'></div>
-                                                </div>
-                                            </div>
-                                        </button>
-                                    </div>
+                {DisplayWindow &&
+                    <div className='crossContainer'>
+                        <button className='cross' onClick={() => {
+                                                    setDisplayImage(null)
+                                                    setDisplayWindow(false)
+                                                    setDisplayProjectData(null)
+                                                    setDisplayContent(false)
+                                                }}>
+                                                    <div className='BurgerMenuOpen'>
+                                                        <div className='BurgerOneOpen'></div>
+                                                        <div className='BurgerTwoOpen'></div>
+                                                        <div className='BurgerThreeOpen'></div>
+                                                    </div>
+                                            </button>
+                                        </div>
                                     }
             <StarryBackground />
             {!DisplayWindow && <PageTitle Title="Projects"/>}
@@ -209,8 +258,8 @@ useEffect(() => {
                                 setDisplayProjectData(TheSortedArray[CurrentProjectSet]?.[1])
                             }}> 
                         <button className='DefaultButton'>
-                            <article className={DisplayWindow ? "DisplayedWindow" : "BaseMainProjectContainer"}>
-                                <article ref={ProjectCardRef} style={DisplayImage ? {border: "None"} : DisplayWindow ? {} : WinWidth < 730 ? { width: '80vw', height: '80vw' } : WinWidth < 850 ? { width: '65vw', height: '65vw' } : WinWidth < 1220 ? { width: '50vw', height: '50vw' } : {}} className='MainProject'>
+                            <article className={"DisplayedWindow"} style={DisplayWindow ? DisplayedWindow : undefined}>
+                                <article ref={ProjectCardRef} style={DisplayWindow ? (DisplayImage ? { border: "none" } : undefined) : MainProject} className={DisplayWindow ? 'MainProjectEnlarged' : 'MainProject'}>
 
                                     {<div className={!DisplayWindow ? 'ContentArea' : "ContentArea Disappear"}>
                                         <div className="ContentTitle">

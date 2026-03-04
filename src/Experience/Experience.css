@@ -47,7 +47,7 @@
 }
 
 .Experience{
-    position: absolute;
+    position: relative;
     left: 50%;  /* Move to the middle horizontally */
     transform: translate(-50%); /* Offset by half its own size */
     margin-top: 0;
