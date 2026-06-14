@@ -125,7 +125,7 @@ a{
 
 .DropDownMenu{
     position: absolute;
-    top: 7rem;
+    top: 5rem;
     left: 0rem;
     padding: 1rem;
     border-radius:  10rem 10rem 10rem 10rem;
@@ -158,50 +158,30 @@ a{
     
 }
 
-button {
-    position: relative;
-    background-color: #070e14b7;
-    border: none;
-    border-radius: 10rem;
-    padding: 0.5rem 1rem;
-    text-align: center;
-    color: #e2e2e2;
-    font-family: 'Poppins', serif;
-    font-weight: 500;
-    font-size: 1.5rem;
-    overflow: hidden;
-    z-index: 1;
-    cursor: pointer;
-    text-decoration: none;
+.ButtonsCollection a button{
+    text-align:  left;
+    transition: all 0.3s ease-in-out;
+    background-color: #00000000;
 }
 
-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    border-radius: 10rem;
-    border: 1px solid transparent;
-    box-sizing: border-box;
-    z-index: 0;
-    pointer-events: none;
-
-    mask: 
-        linear-gradient(0deg, white 100%, transparent 50%) content-box,
-        linear-gradient(0deg, white 100%, transparent 50%) border-box;
+.ButtonsCollection a button::before{
+    mask: none; 
     mask-composite: exclude;
-
-    background: linear-gradient(90deg, #ffffff 25%, transparent 50%, #ffffff 75%);
-    background-size: 200% 200%;
-    animation: animatedBorder 2s linear infinite;
     transition: opacity 0.3s ease-in-out;
     opacity: 0;
 }
 
-button:hover::before {
-    opacity: 1;
+.ButtonsCollection a button:hover{
+    transform: translateX(0.4rem);
+    scale: 1.05;
+    background: linear-gradient(135deg, #e2e2e2 25%, #5973a651, #e2e2e2 75%);
+    background-size: 200% 100%;
+    animation-name: Shimmer;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 @media (max-width: 800px) {

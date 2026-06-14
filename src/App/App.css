@@ -14,3 +14,49 @@ body {
 html, body {
   overscroll-behavior: none;
 }
+
+button {
+    position: relative;
+    background-color: #070e14b7;
+    border: none;
+    border-radius: 10rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    color: #e2e2e2;
+    font-family: 'Poppins', serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    z-index: 0;
+    pointer-events: none;
+
+    mask: 
+        linear-gradient(0deg, white 100%, transparent 50%) content-box,
+        linear-gradient(0deg, white 100%, transparent 50%) border-box;
+    mask-composite: exclude;
+
+    background: linear-gradient(90deg, #ffffff 25%, transparent 50%, #ffffff 75%);
+    background-size: 200% 200%;
+    animation: animatedBorder 2s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+}
+
+button:hover::before {
+    opacity: 1;
+}

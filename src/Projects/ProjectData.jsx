@@ -26,7 +26,7 @@ export default function ProjectData(){
                 Img2: '/Projects/Images/TradeSim3.png',
                 Img3: '/Projects/Images/TradeSim.png',
                 Img4: '/Projects/Images/TradeSim4.png',
-                TechUsed: ['React', 'TypeScript', 'C#', '.Net', 'HTML5', 'CSS3', 'Next.js'],
+                TechUsed: ['React', 'TypeScript', 'C#', '.Net', 'HTML5', 'CSS3', 'Jest', 'Axios'],
                 Link: 'https://github.com/AashiqDina/TradingSimulator',
                 TryableLink: 'https://aashiqdina.github.io/trading-sim/#/'
             },

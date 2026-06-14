@@ -291,15 +291,7 @@ export default function Projects() {
                                             <div className='ProjectSkillSection'>
                                                 <div className='ProjectSkillCarouselContainer'>
                                                     <div className='ProjectSkillCarouselTrack'>
-                                                        {[...Skills].map((skill, index) => (
-                                                        <div
-                                                            className='ProjectSkills'
-                                                            key={`${skill}-${index % DisplayProjectData.TechUsed.length}`}
-                                                        >
-                                                            {skill}
-                                                        </div>
-                                                        ))}
-                                                        {[...Skills].map((skill, index) => (
+                                                        {[...Skills].concat([...Skills]).map((skill, index) => (
                                                         <div
                                                             className='ProjectSkills'
                                                             key={`${skill}-${index % DisplayProjectData.TechUsed.length}`}
