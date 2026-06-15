@@ -1,14 +1,9 @@
-import Header from '../Header/Header.jsx'
-import '../Header/Header.css'
 import './Home.css'
-import StarryBackground from '../Background/StarryBackground.jsx'
 import { Link } from 'react-router-dom'
 
 export default function Home(){
     return (
         <>
-            <Header/>
-            <StarryBackground/>
             <section className='HomeBody'>
                 <article className='UsefulThings'>
                     <button onClick={() => window.location.href = 'https://github.com/AashiqDina'}>Github</button>

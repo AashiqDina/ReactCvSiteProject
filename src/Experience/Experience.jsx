@@ -1,6 +1,4 @@
 import './Experience.css'
-import Header from "../Header/Header"
-import StarryBackground from "../Background/StarryBackground"
 import PageTitle from "../Functions/PageTitle"
 import ExperienceData from "./ExperienceData"
 import { useEffect, useState } from 'react'
@@ -48,8 +46,6 @@ export default function Experience(){
 
     return (
         <>
-            <Header/>
-            <StarryBackground/>
             <PageTitle Title="Experience"/>
             
             <section className="LevelSection">

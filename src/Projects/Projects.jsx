@@ -1,5 +1,3 @@
-import Header from '../Header/Header.jsx';
-import StarryBackground from '../Background/StarryBackground.jsx';
 import './Projects.css';
 import { useEffect, useState, useRef } from 'react';
 import ProjectData from './ProjectData.jsx'
@@ -142,13 +140,12 @@ export default function Projects() {
             background: "linear-gradient(180deg, #04080ced, #101b314d)",
             width: "100vw",
             height: "100vh",
-            position: "relative",
+            position: "fixed",
             top: "0%",
             left: "50%",
             transform: "translate(-50%, 0%)",
             zIndex: "10",
         }
-
 
 
     //_________________________________________________________________________________________
@@ -200,7 +197,6 @@ export default function Projects() {
 
     return (
         <>
-            {!DisplayWindow && <Header />}
                 {DisplayImage && <div className='ProjectImageBackButton' onClick={() => {
                         setDisplayImage(null)
                         setDisplayWindow(true)
@@ -225,7 +221,6 @@ export default function Projects() {
                                             </button>
                                         </div>
                                     }
-            <StarryBackground />
             {!DisplayWindow && <PageTitle Title="Projects"/>}
             {<section className='ProjectsMainSection' id='ProjectsMainSection'>
                 <article role='button' className='ProjectsDisplayed' id='ProjectsDisplayed'>

@@ -79,7 +79,7 @@
 }
 
 .BurgerMenuButton{
-    all: unset;
+    margin: 0;
 }
 
 .BurgerMenuButton::before{
@@ -129,7 +129,10 @@ a{
     left: 0rem;
     padding: 1rem;
     border-radius:  10rem 10rem 10rem 10rem;
-    background-color: #e5e5e580;
+    border-width: 1px 1px 1px 0px;
+    border-color: rgba(255, 255, 255, 0);
+    border-style: solid;
+    background-color: #e5e5e50a;
     transform: scale(0);
     opacity: 0;
     transition: all 1s ease-in-out;
@@ -154,24 +157,29 @@ a{
     flex-direction: column;
     align-items:flex-start;
     justify-content: center;
-    gap: 1rem;
-    
+    gap: 1rem;   
+    margin-right: 1rem;
 }
 
-.ButtonsCollection a button{
+.ButtonsCollection a h2{
+    font-size: 1.5rem;
+    margin: 0.5rem 0 0.5rem 1rem;
+    font-weight: 400;
+}
+
+.ButtonsCollection a{
     text-align:  left;
     transition: all 0.3s ease-in-out;
     background-color: #00000000;
+    width: 100%;
 }
 
-.ButtonsCollection a button::before{
-    mask: none; 
-    mask-composite: exclude;
+.ButtonsCollection a::before{
     transition: opacity 0.3s ease-in-out;
     opacity: 0;
 }
 
-.ButtonsCollection a button:hover{
+.ButtonsCollection a:hover{
     transform: translateX(0.4rem);
     scale: 1.05;
     background: linear-gradient(135deg, #e2e2e2 25%, #5973a651, #e2e2e2 75%);
@@ -183,6 +191,8 @@ a{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+
 
 @media (max-width: 800px) {
     .HeaderTitle{
@@ -209,8 +219,10 @@ a{
 @media (max-width: 600px) {
 
     .PageHeader{
+        margin-left: 0;
         margin-right: 0.1rem;
         margin-bottom: 2rem;
+        padding: 0.5rem;
     }
 
     .HeaderTitle {
@@ -227,6 +239,10 @@ a{
 
     .ButtonsCollection > a > button{
         font-size: 1.2rem;
+    }
+
+    .HeaderTitle{
+        font-size: 1.5rem;
     }
 }
 

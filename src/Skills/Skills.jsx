@@ -1,5 +1,3 @@
-import Header from "../Header/Header.jsx"
-import StarryBackground from "../Background/StarryBackground"
 import './Skills.css'
 import { useEffect, useState } from "react"
 import SkillsData from "./SkillsData"
@@ -41,8 +39,6 @@ export default function Skills(){
 
     return (
         <>
-            <Header/>
-            <StarryBackground/>
             <PageTitle Title="Skills"/>
             <section className="SkiilsSearchBarSection">
                 <input style={WinWidth < 1000 ? {width: "80%"} : {width: "50%"}} type="text" value={SkillsInput} onChange={(e) => {FilterSkills(e.target.value); setSkillsInput(e.target.value)}} className="SkillsSearchInput" placeholder="Enter a Skill (e.g. JavaScript)"/>

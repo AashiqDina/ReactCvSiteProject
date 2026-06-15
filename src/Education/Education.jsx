@@ -1,7 +1,5 @@
 import { useState, useEffect} from 'react'
 import { motion, scale } from 'framer-motion'
-import Header from '../Header/Header.jsx'
-import StarryBackground from '../Background/StarryBackground.jsx'
 import './Education.css'
 import EducationData from './EducationData.jsx'
 import PageTitle from '../Functions/PageTitle.jsx'
@@ -28,8 +26,6 @@ export default function Education(){
 
     return(
         <>
-            {!ShowTimeline && <Header/>}
-            <StarryBackground/>
             {!ShowTimeline && <PageTitle Title="Education"/>}
             <section className='EducationContentBody'>
                 {!ShowTimeline && <article className='EducationSummarySection'>
