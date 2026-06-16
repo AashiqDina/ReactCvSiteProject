@@ -3,7 +3,7 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import Header from "./components/header/Header.jsx"
 import StarryBackground from "./components/background/StarryBackground.jsx"
-import Home from "./Home/Home";
+import Home from "./pages/home/Home.jsx"
 import Projects from './Projects/Projects'
 import Skills from './Skills/Skills'
 import Education from './Education/Education';

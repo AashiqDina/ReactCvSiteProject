@@ -8,11 +8,9 @@ export default function Header(){
 
         <header className="PageHeader">            
             <HeaderBurgerMenu/>
-
             <Link to="/" className='HeaderTitle'>
                 <h1 className='HeaderTitle'>Aashiq Dina</h1>
             </Link>
-
         </header>
     )
 }

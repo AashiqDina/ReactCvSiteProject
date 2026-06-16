@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 export default function HeaderBurgerMenu(){
     const [burgerMenuClicked, SetBurgerMenuClicked] = useState(false)
 
+    const invertMenuSelection = () => {SetBurgerMenuClicked(prev => !prev)}
+
     return (
         <>
-            <button  className='BurgerMenuButton' onClick={() => SetBurgerMenuClicked(prev => !prev)}>
+            <button  className='BurgerMenuButton' onClick={invertMenuSelection}>
                 <div className={`BurgerMenu${burgerMenuClicked ? "Open" : ""}`}>
                     <div className={`BurgerOne${burgerMenuClicked ? "Open" : ""}`}></div>
                     <div className={`BurgerTwo${burgerMenuClicked ? "Open" : ""}`}></div>
@@ -17,18 +19,18 @@ export default function HeaderBurgerMenu(){
 
             <div className={`DropDownMenu ${burgerMenuClicked ? "DropDownMenuClicked" : ""}`}>
                 <div className='ButtonsCollection'>
-                    <BurgerLink title="Home" path="/" menuState={burgerMenuClicked}/>
-                    <BurgerLink title="Experience" path="/Experience" menuState={burgerMenuClicked}/>
-                    <BurgerLink title="Education" path="/Education" menuState={burgerMenuClicked}/>
-                    <BurgerLink title="Projects" path="/Projects" menuState={burgerMenuClicked}/>
-                    <BurgerLink title="Skills" path="/Skills" menuState={burgerMenuClicked}/>
+                    <BurgerLink title="Home" path="/" menuState={burgerMenuClicked} closeMenu={invertMenuSelection}/>
+                    <BurgerLink title="Experience" path="/Experience" menuState={burgerMenuClicked} closeMenu={invertMenuSelection}/>
+                    <BurgerLink title="Education" path="/Education" menuState={burgerMenuClicked} closeMenu={invertMenuSelection}/>
+                    <BurgerLink title="Projects" path="/Projects" menuState={burgerMenuClicked} closeMenu={invertMenuSelection}/>
+                    <BurgerLink title="Skills" path="/Skills" menuState={burgerMenuClicked} closeMenu={invertMenuSelection}/>
                 </div>
             </div>
         </>
     )
 }
 
-function BurgerLink({title, path, menuState}){
+function BurgerLink({title, path, menuState, closeMenu}){
     return(
         <Link 
             style={{
@@ -37,7 +39,9 @@ function BurgerLink({title, path, menuState}){
             }}
             aria-disabled={!menuState}
             tabIndex={menuState ? 0 : -1} 
-            to={path}>
+            to={path}
+            onClick={closeMenu}
+        >
                 <h2>{title}</h2>
         </Link>
     )

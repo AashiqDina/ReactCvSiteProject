@@ -45,11 +45,29 @@
     gap: 2rem;
 }
 
-.UsefulThings > Button{
+.UsefulThings Button{
+    all: unset;
+    text-align: center;
+    cursor: pointer;
     font-size: 2rem;
     padding: 1.2rem 2rem 1.2rem 2rem;
     width: 12rem;
     transition: all 0.5s ease-in-out;
+}
+
+.UsefulThings Button::before{
+    all: unset;
+}
+
+.UsefulThings Button:hover{
+    background: linear-gradient(135deg, #e2e2e2 25%, #5973a651, #e2e2e2 75%);
+    background-size: 200% 100%;
+    animation-name: Shimmer;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .QuickSections{
