@@ -2,6 +2,7 @@ import './Projects.css';
 import { useEffect, useState, useRef } from 'react';
 import ProjectData from './ProjectData.jsx'
 import PageTitle from '../Functions/PageTitle.jsx';
+import {sortProjects, applyTilt} from '../utils/projectUtils.js'
 
 
 export default function Projects() {
@@ -15,43 +16,27 @@ export default function Projects() {
     const [DisplayContent, setDisplayContent] = useState(false)
     const [Skills, setSkills] = useState(null)
     const ProjectCardRef = useRef(null);
+    const timeoutRef = useRef(null);
 
     //_________________________________________________________________________________________
     //  Tilt Functions
     //_________________________________________________________________________________________
 
 
-    function applyTilt(clientX, clientY) {
+    function tilt(clientX, clientY) {
         const ProjCard = ProjectCardRef.current;
-        const ArticleSpecs = ProjCard.getBoundingClientRect();
-
-        const xDistanceInArticle = clientX - ArticleSpecs.left;
-        const yDistanceInArticle = clientY - ArticleSpecs.top;
-        const ProjCardCenterX = ArticleSpecs.width / 2;
-        const ProjCardCenterY = ArticleSpecs.height / 2;
-
-        const RotateX =
-            ((yDistanceInArticle - ProjCardCenterY) / ProjCardCenterY) * 10;
-        const RotateY =
-            ((xDistanceInArticle - ProjCardCenterX) / ProjCardCenterX) * 10;
-
-        ProjCard.style.transform = `
-            perspective(43rem)
-            scale(1.03)
-            rotateX(${-RotateX}deg)
-            rotateY(${RotateY}deg)
-        `;
+        applyTilt(ProjCard, clientX, clientY)
     }
 
     function handleMouseMove(e) {
-        applyTilt(e.clientX, e.clientY);
+        tilt(e.clientX, e.clientY);
     }
 
     function handleTouchMove(e) {
         if (!e.touches.length) return;
 
         const touch = e.touches[0];
-        applyTilt(touch.clientX, touch.clientY);
+        tilt(touch.clientX, touch.clientY);
     }
 
     function handleMouseLeave() {
@@ -61,94 +46,45 @@ export default function Projects() {
     //_________________________________________________________________________________________
     //  Other Functions
     //_________________________________________________________________________________________
-    
-    function MoveRight() {
+
+    // right === 0 && left === 1
+    function switchProj(direction){
         SetSortedArray(prevArray => {
-            const tempSA = prevArray.map(inner => [...inner]);
-            const current = tempSA[CurrentProjectSet];
-            const temp = current[0];
-            current[0] = current[1];
-            current[1] = current[2];
-            current[2] = temp;
-            return tempSA;
-        });
+            const newArr = [...prevArray]
+            const current = newArr[CurrentProjectSet]
+            const temp = current[0]
+            current[0] = current[direction+1]
+            current[direction+1] = current[2-direction]
+            current[2-direction] = temp
+            return newArr
+        })
     }
 
-        function MoveLeft() {
-            SetSortedArray(prevArray => {
-                const tempSA = prevArray.map(inner => [...inner]);
-                const current = tempSA[CurrentProjectSet];
-                const temp = current[0];
-                current[0] = current[2];
-                current[2] = current[1];
-                current[1] = temp;
-                return tempSA;
-            });
+    // up === 1 && down === -1
+    function viewMoreProj(direction){
+        if((direction === 1 && CurrentProjectSet > 0) || (direction === -1 && TheSortedArray.length - 1 > CurrentProjectSet)){
+            triggerAnimation()
+
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current)
+            }
+            timeoutRef.current = setTimeout(() => {
+                SetProjectSet(prev => prev - direction)
+            }, 500);
+
+        }
+        console.log(CurrentProjectSet)
     }
 
-        function MoveDown(){
-            if(TheSortedArray.length > CurrentProjectSet){
-                triggerAnimation()
-                const timeout = setTimeout(() => {
-                    SetProjectSet(CurrentProjectSet+1)
-                }, 500);
-            }
-        }
+    function triggerAnimation() {
+        document.getElementById("ProjectsDisplayed").classList.remove("Animated");
+        void document.getElementById("ProjectsDisplayed").offsetWidth;
+        document.getElementById("ProjectsDisplayed").classList.add("Animated");
 
-        function MoveUp(){
-            if(CurrentProjectSet > 0){
-                triggerAnimation()
-                const timeout = setTimeout(() => {
-                    SetProjectSet(CurrentProjectSet-1)
-                }, 500);
-            }
-        }
-
-        function triggerAnimation() {
+        document.getElementById("ProjectsDisplayed").addEventListener('animationend', () => {
             document.getElementById("ProjectsDisplayed").classList.remove("Animated");
-            void document.getElementById("ProjectsDisplayed").offsetWidth;
-            document.getElementById("ProjectsDisplayed").classList.add("Animated");
-
-            document.getElementById("ProjectsDisplayed").addEventListener('animationend', () => {
-                document.getElementById("ProjectsDisplayed").classList.remove("Animated");
-            }, { once: true });
-        }
-
-    //_________________________________________________________________________________________
-
-        const MainProject = {
-            backgroundColor: "#070e14d0",
-            width: "100%",
-            height: "100%",
-            color: "white",
-            borderRadius: "2rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "row",
-            gap: "0rem",
-            overflow: "visible",
-            zIndex: 2,
-            cursor: "pointer",
-            transformStyle: "preserve-3d",
-            border: "1px rgba(255, 255, 255, 0.455) solid",
-            perspective: "800px",
-            transition: "all 0.2s ease"
-        };
-
-        const DisplayedWindow ={
-            background: "linear-gradient(180deg, #04080ced, #101b314d)",
-            width: "100vw",
-            height: "100vh",
-            position: "fixed",
-            top: "0%",
-            left: "50%",
-            transform: "translate(-50%, 0%)",
-            zIndex: "10",
-        }
-
-
-    //_________________________________________________________________________________________
+        }, { once: true });
+    }
 
 
     useEffect(() => {
@@ -158,30 +94,14 @@ export default function Projects() {
     }, []);
 
     useEffect(() => {
-        var Test = ProjectData();
-        var SortedArray = [];
-        var Counter = 1;
-        var ArrayCounter = 0;
+        const data = ProjectData()
+        const sortedData = sortProjects(data)
 
-        for(let i = 0; i < Test.length; i++){
-            if(Counter === 1){
-                SortedArray.push([Test[i]]);
-            }
-            else if(Counter <= 3){
-                SortedArray[ArrayCounter].push(Test[i]);
-            }
-            if(Counter === 3){
-                Counter = 0;
-                ArrayCounter++;
-            }
-            Counter += 1;
-        }
-        SetSortedArray(SortedArray);
+        SetSortedArray(sortedData);
         const timeout = setTimeout(() => {
-        setAnimateMainProjectText(true);
+            setAnimateMainProjectText(true);
         }, 100);
     }, []);
-
     
     useEffect(() => {
         if (DisplayProjectData && !DisplayImage) {
@@ -189,11 +109,6 @@ export default function Projects() {
             return () => clearTimeout(timer);
         }
     }, [DisplayProjectData, DisplayImage]);
-
-
-
-
-
 
     return (
         <>
@@ -226,7 +141,7 @@ export default function Projects() {
                 <article role='button' className='ProjectsDisplayed' id='ProjectsDisplayed'>
 
                     {WinWidth > 1000  && !DisplayWindow && (
-                        <button className='DefaultButton' onClick={MoveLeft}>
+                        <button className='DefaultButton' onClick={() => switchProj(1)}>
                             <article className='LeftProject'>
                                 <div className='ContentArea'>
                                     <div className='ContentTitle'>
@@ -238,7 +153,7 @@ export default function Projects() {
                     )}
                     
                     {WinWidth < 1000 && !DisplayWindow && (
-                        <button className='LeftTriangleButton' onClick={MoveLeft}>
+                        <button className='LeftTriangleButton' onClick={() => switchProj(1)}>
                             <div style={{transform: "scale(0.8)"}} className='LeftAlignedButton'>
                                 <div className='LeftTriangle'></div>
                             </div>
@@ -253,8 +168,8 @@ export default function Projects() {
                                 setDisplayProjectData(TheSortedArray[CurrentProjectSet]?.[1])
                             }}> 
                         <button className='DefaultButton'>
-                            <article className={"DisplayedWindow"} style={DisplayWindow ? DisplayedWindow : undefined}>
-                                <article ref={ProjectCardRef} style={DisplayWindow ? (DisplayImage ? { border: "none" } : undefined) : MainProject} className={DisplayWindow ? 'MainProjectEnlarged' : 'MainProject'}>
+                            <article className={DisplayWindow ? "DisplayedWindow" : "Main"}>
+                                <article ref={ProjectCardRef} style={DisplayImage ? { border: "none" } : undefined} className={DisplayWindow ? 'MainProjectEnlarged' : 'MainProject'}>
 
                                     {<div className={!DisplayWindow ? 'ContentArea' : "ContentArea Disappear"}>
                                         <div className="ContentTitle">
@@ -289,7 +204,7 @@ export default function Projects() {
                                                         {[...Skills].concat([...Skills]).map((skill, index) => (
                                                         <div
                                                             className='ProjectSkills'
-                                                            key={`${skill}-${index % DisplayProjectData.TechUsed.length}`}
+                                                            key={`${skill}-${index}/${Skills.length*2}`}
                                                         >
                                                             {skill}
                                                         </div>
@@ -302,9 +217,6 @@ export default function Projects() {
                                                 <a className='ProjectGithubLink' href={DisplayProjectData.Link || null}>View the Code!</a>                      
                                                 <a className='ProjectGithubLink'  href={DisplayProjectData.TryableLink || null}>Try it out!</a>
                                             </div>
-                                            {/* <h4 className='DisplayedWindowMainDesc'>{DisplayProjectData.Description1 || ""}</h4> */}
-                                            {/* <div className='SeperatorLine'></div> */}
-
 
                                             <div className='DisplayedWindowBody'>
                                                 <div className='DisplayedWindowBodyRow1'>
@@ -313,7 +225,6 @@ export default function Projects() {
                                                         setDisplayImage(DisplayProjectData.Img1)
                                                     }} style={{width: "20rem", borderRadius: "1rem", cursor: "pointer"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img1}` || ""} alt="" />
                                                     <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "left", maxWidth: "35rem"}}> {DisplayProjectData.Description1 || ""}</p>
-                                                    {/* <div className='MiniSeperatorLine'></div> */}
                                                 </div>
                                                 <div className='DisplayedWindowBodyRow2'>
                                                     <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "right", maxWidth: "35rem"}}>{DisplayProjectData.Description2 || ""}</p>
@@ -321,7 +232,6 @@ export default function Projects() {
                                                         setDisplayWindow(true)
                                                         setDisplayImage(DisplayProjectData.Img1)
                                                     }} className="ProjectImg" style={{width: "20rem", borderRadius: "1rem", cursor: "pointer"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img2}` || ""} alt="" />
-                                                    {/* <div className='MiniSeperatorLine'></div> */}
                                                 </div>
                                                 <div  className='DisplayedWindowBodyRow3'>
                                                     <img onClick={() => {
@@ -329,7 +239,6 @@ export default function Projects() {
                                                         setDisplayImage(DisplayProjectData.Img1)
                                                     }} className="ProjectImg" style={{width: "20rem", borderRadius: "1rem", cursor: "pointer"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img3}` || ""} alt="" />
                                                     <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "left", maxWidth: "35rem"}}>{DisplayProjectData.Description3 || ""}</p>
-                                                    {/* <div className='MiniSeperatorLine'></div> */}
                                                 </div>
                                                 <div className='DisplayedWindowBodyRow4'>
                                                     <p style={(WinWidth < 1050) ? {textAlign: "center", maxWidth: "35rem"} : {textAlign: "right", maxWidth: "35rem"}}>{DisplayProjectData.Description4 || ""}</p>
@@ -342,9 +251,6 @@ export default function Projects() {
                                         </article>
                                     </div>
                                     }
-
-
-
                                 </article>
                             </article>
                         </button>
@@ -356,7 +262,7 @@ export default function Projects() {
 
                     
                     {!DisplayWindow && WinWidth < 1000 && (
-                        <button className='RightTriangleButton' onClick={MoveRight}>
+                        <button className='RightTriangleButton' onClick={() => switchProj(0)}>
                             <div style={{transform: "scale(0.8)"}} className='RightAlignedButton'>
                                 <div className='RightTriangle'></div>
                             </div>
@@ -365,7 +271,7 @@ export default function Projects() {
 
 
                     {!DisplayWindow && WinWidth > 1000 && (
-                        <button className='DefaultButton' onClick={MoveRight}>
+                        <button className='DefaultButton' onClick={() => switchProj(0)}>
                             <article role='button' className='RightProject'>
                                 <div className='ContentArea'>
                                     <div className='ContentTitle'>
@@ -378,12 +284,12 @@ export default function Projects() {
                 </article>
                 {!DisplayWindow && <article className='UpDownButtons'>
                     <div>
-                        {CurrentProjectSet > 0 && <button className='UpTriangleButton' onClick={MoveUp}>
+                        {CurrentProjectSet > 0 && <button className='UpTriangleButton' onClick={() => viewMoreProj(1)}>
                             <div className='UpAlignedButton'>
                                 <div className='UpTriangle'></div>
                             </div>
                         </button>}
-                        {TheSortedArray.length-1 > CurrentProjectSet && <button className='DownTriangleButton' onClick={MoveDown}>
+                        {TheSortedArray.length-1 > CurrentProjectSet && <button className='DownTriangleButton' onClick={() => viewMoreProj(-1)}>
                             <div className='DownAlignedButton'>
                                 <div className='DownTriangle'></div>
                             </div>
@@ -396,88 +302,6 @@ export default function Projects() {
 
 
 
-            {/* {DisplayWindow && <section className='DisplayedWindow' >
-                {DisplayImage && <div className='ProjectImageBackButton' onClick={() => {
-                        setDisplayImage(null)
-                        setDisplayWindow(true)
-                        setDisplayProjectData(TheSortedArray[CurrentProjectSet]?.[1])
-                    }}>
-                        <div className='ProjectBackLineOne'></div>
-                        <div className='ProjectBackLineTwo'></div>
-                    </div>}
-                    <button className='DefaultButton' onClick={() => {
-                            setDisplayImage(null)
-                            setDisplayWindow(false)
-                            setDisplayProjectData(null)
-                        }}>
-                        <div className='Cross'>
-                            <div className='BurgerMenuOpen'>
-                                <div className='BurgerOneOpen'></div>
-                                <div className='BurgerTwoOpen'></div>
-                                <div className='BurgerThreeOpen'></div>
-                            </div>
-                        </div>
-                    </button>
-                    {DisplayImage && 
-                        <article>
-                            <div>
-                                <img style={{borderRadius: "2rem", height: "inherit"}} src={`${process.env.PUBLIC_URL}${DisplayImage}`} alt='ClickedImageOne'></img>
-                            </div>
-                        </article>}
-                    {DisplayProjectData && !DisplayImage && 
-                        <article className='DisplayedWindowData' style={{background: 'linear-gradient(#04080c, #101b31)'}}>
-                            <h2 className='DisplayedWindowTitle'>{DisplayProjectData.ProjectTitle || ""}</h2>
-                            <span className='ProjectSkillCarousel'>
-                                <div className='ProjectSkillsCarouselTrack'>
-                                    {
-                                    [...DisplayProjectData.TechUsed, ...DisplayProjectData.TechUsed, ...DisplayProjectData.TechUsed].map((Skill, index) => (
-                                        <div className='ProjectSkills'>
-                                            {Skill}
-                                        </div>
-                                    )
-                                    )}
-                                </div>
-                            </span>
-                            <a className='ProjectGithubLink' href={DisplayProjectData.Link || null}>View the Code!</a>
-                            <h4 className='DisplayedWindowMainDesc'>{DisplayProjectData.Description1 || ""}</h4>
-                            {DisplayProjectData.TryableLink != null &&                         
-                            <Link className='ProjectTryItOut' role="button" to={DisplayProjectData.TryableLink}>
-                                Try it out!
-                            </Link>}
-
-                            <div className='DisplayedWindowBody'>
-                                <div className='DisplayedWindowBodyRow1'>
-                                    <img onClick={() => {
-                                        setDisplayWindow(true)
-                                        setDisplayImage(DisplayProjectData.Img1)
-                                    }} style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img1}` || ""} alt="" />
-                                    <p style={{maxWidth: "35rem", textAlign: "center"}} >{DisplayProjectData.Description2 || ""}</p>
-                                </div>
-                                <div onClick={() => {
-                                        setDisplayWindow(true)
-                                        setDisplayImage(DisplayProjectData.Img2)
-                                    }} className='DisplayedWindowBodyRow2'>
-                                    <p style={{maxWidth: "35rem", textAlign: "center"}}>{DisplayProjectData.Description3 || ""}</p>
-                                    <img  style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img2}` || ""} alt="" />
-                                </div>
-                                <div onClick={() => {
-                                        setDisplayWindow(true)
-                                        setDisplayImage(DisplayProjectData.Img3)
-                                    }} className='DisplayedWindowBodyRow3'>
-                                    <img style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img3}` || ""} alt="" />
-                                    <p style={{maxWidth: "35rem", textAlign: "center"}}>{DisplayProjectData.Description4 || ""}</p>
-                                </div>
-                                <div onClick={() => {
-                                        setDisplayWindow(true)
-                                        setDisplayImage(DisplayProjectData.Img4)
-                                    }} className='DisplayedWindowBodyRow4'>
-                                    <p style={{maxWidth: "35rem", textAlign: "center"}}>{DisplayProjectData.Description5 || ""}</p>
-                                    <img style={{width: "20rem", borderRadius: "1rem"}} src={`${process.env.PUBLIC_URL}${DisplayProjectData.Img4}` || ""} alt="" />
-                                </div>
-                            </div>
-                        </article>
-                    }
-            </section>} */}
         </>
     );
 }  
